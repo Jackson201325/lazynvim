@@ -10,15 +10,15 @@ M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 ---@type table<string, string>
 M.deprecated_extras = {
-  ["lazyvim.plugins.extras.formatting.conform"] = "`conform.nvim` is now the default **LazyVim** formatter.",
-  ["lazyvim.plugins.extras.linting.nvim-lint"] = "`nvim-lint` is now the default **LazyVim** linter.",
-  ["lazyvim.plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default **LazyVim** starter.",
-  ["lazyvim.plugins.extras.coding.native_snippets"] = "Native snippets are now the default for **Neovim >= 0.10**",
-  ["lazyvim.plugins.extras.ui.treesitter-rewrite"] = "Disabled `treesitter-rewrite` extra for now. Not ready yet.",
-  ["lazyvim.plugins.extras.coding.mini-ai"] = "`mini.ai` is now a core LazyVim plugin (again)",
-  ["lazyvim.plugins.extras.lazyrc"] = "local spec files are now a lazy.nvim feature",
-  ["lazyvim.plugins.extras.editor.trouble-v3"] = "Trouble v3 has been merged in main",
-  ["lazyvim.plugins.extras.lang.python-semshi"] = [[The python-semshi extra has been removed,
+  ["plugins.extras.formatting.conform"] = "`conform.nvim` is now the default ****formatter.",
+  ["plugins.extras.linting.nvim-lint"] = "`nvim-lint` is now the default ****linter.",
+  ["plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default ****starter.",
+  ["plugins.extras.coding.native_snippets"] = "Native snippets are now the default for **Neovim >= 0.10**",
+  ["plugins.extras.ui.treesitter-rewrite"] = "Disabled `treesitter-rewrite` extra for now. Not ready yet.",
+  ["plugins.extras.coding.mini-ai"] = "`mini.ai` is now a core plugin (again)",
+  ["plugins.extras.lazyrc"] = "local spec files are now a lazy.nvim feature",
+  ["plugins.extras.editor.trouble-v3"] = "Trouble v3 has been merged in main",
+  ["plugins.extras.lang.python-semshi"] = [[The python-semshi extra has been removed,
   because it's causing too many issues.
   Either use `basedpyright`, or copy the [old extra](https://github.com/LazyVim/LazyVim/blob/c1f5fcf9c7ed2659c9d5ac41b3bb8a93e0a3c6a0/lua/lazyvim/plugins/extras/lang/python-semshi.lua#L1) to your own config.
   ]],
@@ -49,7 +49,8 @@ function M.setup()
   table.insert(package.loaders, function(module)
     if M.deprecated_modules[module] then
       LazyVim.warn(
-        ("`%s` is no longer included by default in **LazyVim**.\nPlease install the `%s` extra if you still want to use it."):format(
+        ("`%s` is no longer included by default in **LazyVim**.\nPlease install the `%s` extra if you still want to use it.")
+        :format(
           module,
           M.deprecated_modules[module]
         ),
@@ -63,7 +64,7 @@ end
 function M.extra_idx(name)
   local Config = require("lazy.core.config")
   for i, extra in ipairs(Config.spec.modules) do
-    if extra == "lazyvim.plugins.extras." .. name then
+    if extra == "plugins.extras." .. name then
       return i
     end
   end
@@ -106,7 +107,7 @@ function M.fix_imports()
   Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then
-      dep = dep .. "\n" .. "Please remove the extra from `lazyvim.json` to hide this warning."
+      dep = dep .. "\n" .. "Please remove the extra from `json` to hide this warning."
       LazyVim.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
       return false
     end

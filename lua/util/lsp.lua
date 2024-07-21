@@ -277,7 +277,7 @@ function M.words.setup(opts)
       group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
       buffer = buf,
       callback = function(ev)
-        if not require("lazyvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
+        if not require("plugins.lsp.keymaps").has(buf, "documentHighlight") then
           return false
         end
 

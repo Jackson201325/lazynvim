@@ -79,10 +79,10 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up", noremap = true, silent
 map("n", "<c-q>", ":qa<cr>", { desc = "Quit all", noremap = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true, silent = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", noremap = true, silent = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", noremap = true, silent = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true, silent = true })
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true, silent = true })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", noremap = true, silent = true })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", noremap = true, silent = true })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true, silent = true })
 
 -- search word under cursor
 map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", noremap = true, silent = true })

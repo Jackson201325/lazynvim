@@ -8,7 +8,7 @@ local LazyUtil = require("lazy.core.util")
 --[[ ---@field terminal util.terminal
 ---@field lazygit util.lazygit ]]
 ---@field toggle util.toggle
---[[ ---@field format util.format ]]
+---@field format util.format
 ---@field plugin util.plugin
 --[[ ---@field extras util.extras ]]
 ---@field inject util.inject

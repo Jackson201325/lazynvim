@@ -22,17 +22,17 @@ local Text = require("lazy.view.text")
 ---@field plugins string[]
 ---@field optional string[]
 
----@class lazyvim.util.extras
+---@class util.extras
 local M = {}
 M.buf = 0
 
 ---@type LazyExtraSource[]
 M.sources = {
-  { name = "LazyVim", desc = "LazyVim extras", module = "lazyvim.plugins.extras" },
+  { name = "LazyVim", desc = "LazyVim extras", module = "plugins.extras" },
   { name = "User", desc = "User extras", module = "plugins.extras" },
 }
 
-M.ns = vim.api.nvim_create_namespace("lazyvim.extras")
+M.ns = vim.api.nvim_create_namespace("extras")
 ---@type string[]
 M.state = nil
 
@@ -289,7 +289,7 @@ function X:extra(extra)
     self.text:append(" "):append(LazyConfig.options.ui.icons.event .. extra.source.name, "LazyReasonEvent")
   end
   for _, import in ipairs(extra.imports) do
-    import = import:gsub("^lazyvim.plugins.extras.", "")
+    import = import:gsub("^plugins.extras.", "")
     self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. import, "LazyReasonStart")
   end
   for _, plugin in ipairs(extra.plugins) do

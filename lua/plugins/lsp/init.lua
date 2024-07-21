@@ -123,11 +123,11 @@ return {
 
       -- setup keymaps
       LazyVim.lsp.on_attach(function(client, buffer)
-        require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+        require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
       LazyVim.lsp.setup()
-      LazyVim.lsp.on_dynamic_capability(require("lazyvim.plugins.lsp.keymaps").on_attach)
+      LazyVim.lsp.on_dynamic_capability(require("plugins.lsp.keymaps").on_attach)
 
       LazyVim.lsp.words.setup(opts.document_highlight)
 

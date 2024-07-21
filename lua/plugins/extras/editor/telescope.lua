@@ -14,10 +14,10 @@ local picker = {
     files = "find_files",
   },
   -- this will return a function that calls telescope.
-  -- cwd will default to lazyvim.util.get_root
+  -- cwd will default to util.get_root
   -- for `files`, git_files or find_files will be chosen depending on .git
   ---@param builtin string
-  ---@param opts? lazyvim.util.pick.Opts
+  ---@param opts? util.pick.Opts
   open = function(builtin, opts)
     opts = opts or {}
     opts.follow = opts.follow ~= false
@@ -84,6 +84,7 @@ return {
           end)
         end,
       },
+      { "nvim-telescope/telescope-live-grep-args.nvim", lazy = true }
     },
     keys = {
       {
@@ -151,6 +152,8 @@ return {
     },
     opts = function()
       local actions = require("telescope.actions")
+      local lga_actions = require("telescope-live-grep-args.actions")
+
 
       local open_with_trouble = function(...)
         return require("trouble.sources.telescope").open(...)
@@ -182,6 +185,21 @@ return {
 
       return {
         defaults = {
+          sorting_strategy = "ascending",
+          initial_mode = "insert",
+          layout_config = {
+            prompt_position = "top",
+            horizontal = {
+              width_padding = 0.1,
+              height_padding = 0.1,
+              preview_width = 0.6, -- Adjust this value to make the preview window wider
+            },
+            vertical = {
+              width_padding = 0.05,
+              height_padding = 1,
+              preview_height = 0.5, -- Adjust this value to make the preview window taller
+            }
+          },
           prompt_prefix = " ",
           selection_caret = " ",
           -- open files in the first window that is an actual file.
@@ -207,6 +225,8 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
+              -- ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** -w" }),
+
             },
             n = {
               ["q"] = actions.close,
@@ -282,7 +302,7 @@ return {
       if LazyVim.pick.want() ~= "telescope" then
         return
       end
-      local Keys = require("lazyvim.plugins.lsp.keymaps").get()
+      local Keys = require("plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
         { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,      desc = "Goto Definition",       has = "definition" },

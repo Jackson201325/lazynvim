@@ -17,16 +17,16 @@ local defaults = {
   defaults = {
     autocmds = true, -- config.autocmds
     keymaps = true,  -- config.keymaps
-    -- config.options can't be configured here since that's loaded before lazyvim setup
+    -- config.options can't be configured here since that's loaded before vim setup
     -- if you want to disable loading options, add `package.loaded["config.options"] = true` to the top of your init.lua
   },
-  news = {
-    -- When enabled, NEWS.md will be shown when changed.
-    -- This only contains big new features and breaking changes.
-    lazyvim = true,
-    -- Same but for Neovim's news.txt
-    neovim = false,
-  },
+  -- news = {
+  --   -- When enabled, NEWS.md will be shown when changed.
+  --   -- This only contains big new features and breaking changes.
+  --   lazyvim = true,
+  --   -- Same but for Neovim's news.txt
+  --   neovim = false,
+  -- },
   -- icons used by other plugins
   -- stylua: ignore
   icons = {
@@ -136,10 +136,10 @@ local defaults = {
 
 M.json = {
   version = 6,
-  path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/lazyvim.json",
+  path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/json",
   data = {
     version = nil, ---@type string?
-    news = {}, ---@type table<string, string>
+    -- news = {}, ---@type table<string, string>
     extras = {}, ---@type string[]
   },
 }
@@ -253,7 +253,7 @@ function M.load(name)
     end
   end
   local pattern = "LazyVim" .. name:sub(1, 1):upper() .. name:sub(2)
-  -- always load lazyvim, then user file
+  -- always load vim, then user file
   if M.defaults[name] or name == "options" then
     _load("config." .. name)
     vim.api.nvim_exec_autocmds("User", { pattern = pattern .. "Defaults", modeline = false })
