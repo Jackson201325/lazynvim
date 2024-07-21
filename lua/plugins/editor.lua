@@ -1,5 +1,4 @@
 return {
-
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -215,14 +214,14 @@ return {
               return require("which-key.extras").expand.buf()
             end,
           },
-          {
-            "<c-w>",
-            group = "windows",
-            proxy = "<c-w>",
-            expand = function()
-              return require("which-key.extras").expand.win()
-            end,
-          },
+          -- {
+          --   "<c-w>",
+          --   group = "windows",
+          --   proxy = "<c-w>",
+          --   expand = function()
+          --     return require("which-key.extras").expand.win()
+          --   end,
+          -- },
           -- better descriptions
           { "gx", desc = "Open with system app" },
         },

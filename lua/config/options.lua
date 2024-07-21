@@ -32,7 +32,8 @@ opt.background = "dark"
 opt.backspace = "indent,eol,start"
 
 opt.autowrite = true
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+-- opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+opt.clipboard = "unnamedplus" -- Sync with system clipboard
 -- opt.cmdheight = 0            -- More space for displaying messages
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3 -- Hide * markup for bold and italic

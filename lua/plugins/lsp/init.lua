@@ -100,6 +100,8 @@ return {
               },
             },
           },
+          biome = {},
+          graphql = {},
         },
         -- you can do any additional lsp server setup here
         -- return true if you don't want this server to be setup with lspconfig
@@ -267,6 +269,18 @@ return {
       ensure_installed = {
         "stylua",
         "shfmt",
+        "biome",
+        "dockerfile-language-server",
+        "elixir-ls",
+        -- "graphql-language-server-cli",
+        -- "jsonls",
+        "prisma-language-server",
+        "pyright",
+        "solargraph",
+        "sqlls",
+        "tailwindcss-language-server",
+        "vue-language-server",
+        "svelte-language-server"
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

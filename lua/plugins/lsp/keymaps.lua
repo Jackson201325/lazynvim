@@ -24,12 +24,11 @@ function M.get()
     { "ga",         LazyVim.lsp.action.source,                    desc = "Source Action",              has = "codeAction" },
     { "<leader>lC", vim.lsp.codelens.refresh,                     desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
     { "<leader>lL", "<cmd>LspLog<cr>",                            desc = "Lsp Log",                    mode = { "n", "v" } },
-    { "<leader>lN", "<cmd>NullLsLog<CR>",                         desc = "Null LS Log",                mode = { "n", "v" } },
+    { "<leader>ln", "<cmd>ConformInfo<CR>",                         desc = "<cmd>NullLsInfo<cr>",        mode = { "n", "v" } },
     { "<leader>lR", LazyVim.lsp.rename_file,                      desc = "Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
     { "<leader>la", vim.lsp.buf.code_action,                      desc = "Code Action",                mode = { "n", "v" },     has = "codeAction" },
     { "<leader>lc", vim.lsp.codelens.run,                         desc = "Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
     { "<leader>ll", "<cmd>LspInfo<cr>",                           desc = "Lsp Info",                   mode = { "n", "v" } },
-    { "<leader>ln", "<cmd>NullLsLog<CR>",                         desc = "<cmd>NullLsInfo<cr>",        mode = { "n", "v" } },
     { "<leader>lr", vim.lsp.buf.rename,                           desc = "Rename",                     has = "rename" },
     -- {
     --   "]]",

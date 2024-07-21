@@ -76,11 +76,11 @@ map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
 map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
+map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map("n", "<leader>bb",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
   { desc = "Buffers" })
 map("n", "<leader>c", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
-map("n", "<leader>d", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map("n", "<leader>x", "<cmd>exit<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 
 -- tabs
