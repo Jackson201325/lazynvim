@@ -1,4 +1,3 @@
-local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 local map = LazyVim.safe_keymap_set
@@ -25,8 +24,8 @@ map("n", "dw", "diw", opts)
 map("n", "dW", "diW", opts)
 map("n", "yw", "yiw", opts)
 map("n", "yW", "yiW", opts)
-map("n", "cw", "ciw", opts)
-map("n", "cW", "ciW", opts)
+-- map("n", "cw", "ciw", opts)
+-- map("n", "cW", "ciW", opts)
 
 --To set in the cursor in the middle when jumping
 map({ "n", "v" }, ")", "{", opts)
@@ -77,7 +76,7 @@ map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
 map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
-map("n", "<leader>b",
+map("n", "<leader>bb",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
   { desc = "Buffers" })
 map("n", "<leader>c", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
@@ -154,7 +153,7 @@ map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
 -- lazy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy", noremap = true, silent = true })
+map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy", noremap = true, silent = true })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", noremap = true, silent = true })
@@ -176,6 +175,8 @@ map("n", "<leader>gg", function() LazyVim.lazygit({ cwd = LazyVim.root.git() }) 
 map("n", "<leader>gG", function() LazyVim.lazygit() end, { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
 map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
+map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
+map("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
 
 -- commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
@@ -191,7 +192,7 @@ map(
 )
 
 -- formatting
-map({ "n", "v" }, "<leader>cf", function()
+map({ "n", "v" }, "<leader>w", function()
   LazyVim.format({ force = true })
 end, { desc = "Format" })
 
@@ -204,12 +205,12 @@ local diagnostic_goto = function(next, severity)
   end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "gl", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "gL", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+-- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+-- map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+-- map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+-- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- -- stylua: ignore start
 map("n", "<leader>gf", function()

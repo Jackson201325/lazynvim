@@ -58,6 +58,7 @@ return {
         end,
       })
     end,
+
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
@@ -87,7 +88,19 @@ return {
           },
           ["P"] = { "toggle_preview", config = { use_float = false } },
         },
+        position = "float",
+        popup = {
+          -- settings that apply to float position only
+          size = {
+            height = "75%",
+            width = "30%",
+          },
+          position = "50%", -- 50% means center it
+          -- you can also specify border here, if you want a different setting from
+          -- the global popup_border_style.
+        },
       },
+      popup_border_style = "single", -- "double", "none", "rounded", "shadow", "single" or "solid"
       default_component_configs = {
         indent = {
           with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
@@ -103,6 +116,7 @@ return {
         },
       },
     },
+
     config = function(_, opts)
       local function on_move(data)
         LazyVim.lsp.on_rename(data.source, data.destination)
@@ -202,7 +216,7 @@ return {
             end,
           },
           {
-            "<leader>w",
+            "<c-w>",
             group = "windows",
             proxy = "<c-w>",
             expand = function()
@@ -270,14 +284,14 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", "]h", function()
+        map("n", "gh", function()
           if vim.wo.diff then
             vim.cmd.normal({ "]c", bang = true })
           else
             gs.nav_hunk("next")
           end
         end, "Next Hunk")
-        map("n", "[h", function()
+        map("n", "gH", function()
           if vim.wo.diff then
             vim.cmd.normal({ "[c", bang = true })
           else

@@ -11,32 +11,55 @@ function M.get()
   if M._keys then
     return M._keys
   end
-    -- stylua: ignore
-    M._keys =  {
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-      { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-      { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-      { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-      { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-      { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-      { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-      { "<leader>cR", LazyVim.lsp.rename_file, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-      { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-      { "<leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
-      { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
-        desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "[[", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight",
-        desc = "Prev Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "<a-n>", function() LazyVim.lsp.words.jump(vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "<a-p>", function() LazyVim.lsp.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Prev Reference", cond = function() return LazyVim.lsp.words.enabled end },
-    }
+  -- stylua: ignore
+  M._keys = {
+    { "gd",         vim.lsp.buf.definition,                       desc = "Goto Definition",            has = "definition" },
+    { "gr",         vim.lsp.buf.references,                       desc = "References",                 nowait = true },
+    { "gI",         vim.lsp.buf.implementation,                   desc = "Goto Implementation" },
+    { "gt",         vim.lsp.buf.type_definition,                  desc = "Goto T[y]pe Definition" },
+    { "gD",         ":vsplit | lua vim.lsp.buf.definition()<cr>", desc = "Go to Definition in Split",  nowait = true,           remap = false },
+    { "K",          vim.lsp.buf.hover,                            desc = "Hover" },
+    { "gK",         vim.lsp.buf.signature_help,                   desc = "Signature Help",             has = "signatureHelp" },
+    { "<c-k>",      vim.lsp.buf.signature_help,                   mode = "i",                          desc = "Signature Help", has = "signatureHelp" },
+    { "ga",         LazyVim.lsp.action.source,                    desc = "Source Action",              has = "codeAction" },
+    { "<leader>lC", vim.lsp.codelens.refresh,                     desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
+    { "<leader>lL", "<cmd>LspLog<cr>",                            desc = "Lsp Log",                    mode = { "n", "v" } },
+    { "<leader>lN", "<cmd>NullLsLog<CR>",                         desc = "Null LS Log",                mode = { "n", "v" } },
+    { "<leader>lR", LazyVim.lsp.rename_file,                      desc = "Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+    { "<leader>la", vim.lsp.buf.code_action,                      desc = "Code Action",                mode = { "n", "v" },     has = "codeAction" },
+    { "<leader>lc", vim.lsp.codelens.run,                         desc = "Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
+    { "<leader>ll", "<cmd>LspInfo<cr>",                           desc = "Lsp Info",                   mode = { "n", "v" } },
+    { "<leader>ln", "<cmd>NullLsLog<CR>",                         desc = "<cmd>NullLsInfo<cr>",        mode = { "n", "v" } },
+    { "<leader>lr", vim.lsp.buf.rename,                           desc = "Rename",                     has = "rename" },
+    -- {
+    --   "]]",
+    --   function() LazyVim.lsp.words.jump(vim.v.count1) end,
+    --   has = "documentHighlight",
+    --   desc = "Next Reference",
+    --   cond = function() return LazyVim.lsp.words.enabled end
+    -- },
+    -- {
+    --   "[[",
+    --   function() LazyVim.lsp.words.jump(-vim.v.count1) end,
+    --   has = "documentHighlight",
+    --   desc = "Prev Reference",
+    --   cond = function() return LazyVim.lsp.words.enabled end
+    -- },
+    -- {
+    --   "<a-n>",
+    --   function() LazyVim.lsp.words.jump(vim.v.count1, true) end,
+    --   has = "documentHighlight",
+    --   desc = "Next Reference",
+    --   cond = function() return LazyVim.lsp.words.enabled end
+    -- },
+    -- {
+    --   "<a-p>",
+    --   function() LazyVim.lsp.words.jump(-vim.v.count1, true) end,
+    --   has = "documentHighlight",
+    --   desc = "Prev Reference",
+    --   cond = function() return LazyVim.lsp.words.enabled end
+    -- },
+  }
 
   return M._keys
 end
