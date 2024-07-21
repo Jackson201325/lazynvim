@@ -4,6 +4,9 @@ if lazyvim_docs then
   vim.g.lazyvim_picker = "telescope"
 end
 
+-- local live_grep_args = require("telescope-live-grep-args")
+-- local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+
 local have_make = vim.fn.executable("make") == 1
 local have_cmake = vim.fn.executable("cmake") == 1
 
@@ -84,7 +87,7 @@ return {
           end)
         end,
       },
-      { "nvim-telescope/telescope-live-grep-args.nvim", lazy = true }
+      { "nvim-telescope/telescope-live-grep-args.nvim" }
     },
     keys = {
       {
@@ -101,8 +104,9 @@ return {
       { "<leader>ff",      LazyVim.pick("files"),                                            desc = "Find Files (Root Dir)" },
       { "<leader>fF",      LazyVim.pick("files", { root = false }),                          desc = "Find Files (cwd)" },
       { "<leader>fg",      "<cmd>Telescope git_files<cr>",                                   desc = "Find Files (git-files)" },
-      { "<leader>fr",      "<cmd>Telescope oldfiles<cr>",                                    desc = "Recent" },
-      { "<leader>fR",      LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }),                 desc = "Recent (cwd)" },
+      { "<leader>fr",      LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }),                 desc = "Recent (cwd)" },
+      -- { "<leader>fw",      live_grep_args_shortcuts.grep_word_under_cursor,                  desc = "Find Word in project under cursor" },
+      -- { "<leader>fr",      "<cmd>Telescope oldfiles<cr>",                                    desc = "Recent" },
       -- git
       { "<leader>gc",      "<cmd>Telescope git_commits<CR>",                                 desc = "Commits" },
       { "<leader>gs",      "<cmd>Telescope git_status<CR>",                                  desc = "Status" },
@@ -225,7 +229,10 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
-              -- ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** -w" }),
+              ["<C-k>"] = lga_actions.quote_prompt({
+                postfix =
+                " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** -w"
+              }),
 
             },
             n = {

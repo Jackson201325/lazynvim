@@ -5,12 +5,12 @@ local LazyUtil = require("lazy.core.util")
 ---@field ui util.ui
 ---@field lsp util.lsp
 ---@field root util.root
---[[ ---@field terminal util.terminal
----@field lazygit util.lazygit ]]
+---@field terminal util.terminal
+---@field lazygit util.lazygit
 ---@field toggle util.toggle
 ---@field format util.format
 ---@field plugin util.plugin
---[[ ---@field extras util.extras ]]
+---@field extras util.extras
 ---@field inject util.inject
 --[[ ---@field news util.news
 ---@field json util.json ]]
