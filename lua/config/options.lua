@@ -14,7 +14,7 @@ opt.smartindent = true -- Insert indents automatically
 opt.expandtab = true
 
 -- line wrapping
-opt.wrap = true -- Disable line wrap
+opt.wrap = false -- Disable line wrap
 
 -- search settings
 opt.ignorecase = true -- Ignore case

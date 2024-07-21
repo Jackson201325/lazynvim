@@ -1,166 +1,167 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
--- -- Minus Plus
-keymap.set("n", "-", "<C-x>", opts)
-keymap.set("n", "=", "<C-a>", opts)
+local map = LazyVim.safe_keymap_set
+
+-- Minus Plus
+map("n", "-", "<C-x>", opts)
+map("n", "=", "<C-a>", opts)
 
 -- Jump back
-keymap.set("n", "<C-o>", "<C-o>zz", opts)
-keymap.set("n", "<C-i>", "<C-i>zz", opts)
+map("n", "<C-o>", "<C-o>zz", opts)
+map("n", "<C-i>", "<C-i>zz", opts)
 
 -- Do not yank with x
-keymap.set("n", "x", '"_x', opts)
+map("n", "x", '"_x', opts)
 
 -- Do not yank with c
-keymap.set({ "n", "v" }, "c", '"_c', opts)
+map({ "n", "v" }, "c", '"_c', opts)
 
 -- Do not yank with dd
-keymap.set("n", "dd", '"_dd', opts)
---
-keymap.set({ "n" }, "vw", "viw", opts)
-keymap.set({ "n" }, "vp", 'viw"_dP', opts)
---
-keymap.set({ "n" }, "dw", "diw", opts)
-keymap.set({ "n" }, "dW", "diW", opts)
+map("n", "dd", '"_dd', opts)
 
-keymap.set({ "n" }, "yw", "yiw", opts)
-keymap.set({ "n" }, "yW", "yiW", opts)
+map("n", "vw", "viw", opts)
+map("n", "vp", 'viw"_dP', opts)
 
-keymap.set({ "n" }, "cw", "ciw", opts)
-keymap.set({ "n" }, "cW", "ciW", opts)
+map("n", "dw", "diw", opts)
+map("n", "dW", "diW", opts)
+
+map("n", "yw", "yiw", opts)
+map("n", "yW", "yiW", opts)
+
+map("n", "cw", "ciw", opts)
+map("n", "cW", "ciW", opts)
 
 -- --To set in the cursor in the middle when jumping
--- keymap.set("n", "(", "{zz", opts)
--- keymap.set("n", ")", "}zz", opts)
+-- map("n", "(", "{zz", opts)
+-- map("n", ")", "}zz", opts)
 
 --To set in the cursor in the middle when jumping
-keymap.set({ "n", "v" }, ")", "{", opts)
-keymap.set({ "n", "v" }, "(", "}", opts)
+map({ "n", "v" }, ")", "{", opts)
+map({ "n", "v" }, "(", "}", opts)
 
 --To set in the cursor in the middle when jumping
-keymap.set({ "n", "v" }, "}", "{", opts)
-keymap.set({ "n", "v" }, "{", "}", opts)
+map({ "n", "v" }, "}", "{", opts)
+map({ "n", "v" }, "{", "}", opts)
 
-keymap.set("n", "N", "Nzz", opts)
-keymap.set("n", "n", "nzz", opts)
+map("n", "N", "Nzz", opts)
+map("n", "n", "nzz", opts)
 
-keymap.set("n", "<C-u>", "<C-u>zz", opts)
-keymap.set("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("n", "<C-d>", "<C-d>zz", opts)
+
 -- Paste over
-keymap.set("x", "p", '"_dP', opts)
+map("x", "p", '"_dP', opts)
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G", opts)
+map("n", "<C-a>", "gg<S-v>G", opts)
 
 -- Faster esc
-keymap.set("i", "jj", "<cmd>noh<cr><ESC>", opts)
-keymap.set("i", "kk", "<cmd>noh<cr><ESC>", opts)
-keymap.set("i", "kj", "<cmd>noh<cr><ESC>", opts)
-keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
+map("i", "jj", "<cmd>noh<cr><ESC>", opts)
+map("i", "kk", "<cmd>noh<cr><ESC>", opts)
+map("i", "kj", "<cmd>noh<cr><ESC>", opts)
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
 
-keymap.set("n", "0", "^", opts)
+map("n", "0", "^", opts)
 
 -- save file
-keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
-
--- better indenting
-keymap.set("v", ">", ">gv", opts)
-keymap.set("v", "<", "<gv", opts)
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
 
 -- Move Lines
-keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down", noremap = true, silent = true })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up", noremap = true, silent = true })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down", noremap = true, silent = true })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up", noremap = true, silent = true })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down", noremap = true, silent = true })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up", noremap = true, silent = true })
 
 -- quit
-keymap.set("n", "<c-q>", ":qa<cr>", { desc = "Quit all" })
+map("n", "<c-q>", ":qa<cr>", { desc = "Quit all", noremap = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true, silent = true })
-keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", noremap = true, silent = true })
-keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", noremap = true, silent = true })
-keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true, silent = true })
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true, silent = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", noremap = true, silent = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", noremap = true, silent = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true, silent = true })
 
 -- search word under cursor
-keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", noremap = true, silent = true })
+map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", noremap = true, silent = true })
 
 -- move
-keymap.set("n", "<S-h>", ":bprevious<cr>", { desc = "Prev buffer", noremap = true, silent = true })
-keymap.set("n", "<S-l>", ":bnext<cr>", { desc = "Next buffer", noremap = true, silent = true })
+map("n", "<S-h>", ":bprevious<cr>", { desc = "Prev buffer", noremap = true, silent = true })
+map("n", "<S-l>", ":bnext<cr>", { desc = "Next buffer", noremap = true, silent = true })
 
 
 -- Lazy Stuff
 
 -- highlights under cursor
-keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-keymap.set("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos", noremap = true, silent = true })
+map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree", noremap = true, silent = true })
 
 -- better up/down
-keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
-keymap.set("n", "<leader><Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-keymap.set("n", "<leader><Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-keymap.set("n", "<leader><Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-keymap.set("n", "<leader><Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map("n", "<leader><Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height", noremap = true, silent = true })
+map("n", "<leader><Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height", noremap = true, silent = true })
+map("n", "<leader><Left>", "<cmd>vertical resize -2<cr>",
+  { desc = "Decrease Window Width", noremap = true, silent = true })
+map("n", "<leader><Right>", "<cmd>vertical resize +2<cr>",
+  { desc = "Increase Window Width", noremap = true, silent = true })
 
 -- buffers
-keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-keymap.set("n", "<leader>d", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
-keymap.set("n", "<leader>c", "<cmd>lua require('mini.bufremove').delete(0, false)<CR>",
-  { desc = "Delete Buffer and Window" })
+map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer", noremap = true, silent = true })
+map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer", noremap = true, silent = true })
+map("n", "<leader>d", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
+-- map("n", "<leader>c", "<cmd>lua require('mini.bufremove').delete(0, false)<CR>",
+--   { desc = "Delete Buffer and Window", noremap = true, silent = true })
 
 -- Clear search with <esc>
-keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch", noremap = true, silent = true })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result", noremap = true, silent = true })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result", noremap = true, silent = true })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result", noremap = true, silent = true })
+map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result", noremap = true, silent = true })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result", noremap = true, silent = true })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result", noremap = true, silent = true })
 
 -- Add undo break-points
-keymap.set("i", ",", ",<c-g>u")
-keymap.set("i", ".", ".<c-g>u")
-keymap.set("i", ";", ";<c-g>u")
+map("i", ",", ",<c-g>u", opts)
+map("i", ".", ".<c-g>u", opts)
+map("i", ";", ";<c-g>u", opts)
 
 -- save file
-keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File", noremap = true, silent = true })
 
 --keywordprg
-keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg", noremap = true, silent = true })
 
 -- better indenting
-keymap.set("v", "<", "<gv")
-keymap.set("v", ">", ">gv")
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
 
 -- lazy
-keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy", noremap = true, silent = true })
 
 -- new file
-keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", noremap = true, silent = true })
 
-keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List", noremap = true, silent = true })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List", noremap = true, silent = true })
 
-keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix", noremap = true, silent = true })
+map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix", noremap = true, silent = true })
 
 -- windows
-keymap.set("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
-keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-keymap.set("n", "<c-w>d", "<C-W>c", { desc = "Delete Window", remap = true })
---
+map("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<c-w>d", "<C-W>c", { desc = "Delete Window", remap = true })
+
 -- -- commenting
 -- -- keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 -- -- map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
