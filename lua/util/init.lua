@@ -2,22 +2,22 @@ local LazyUtil = require("lazy.core.util")
 
 ---@class util: LazyUtilCore
 ---@field config LazyVimConfig
---[[ ---@field ui util.ui
+---@field ui util.ui
 ---@field lsp util.lsp
 ---@field root util.root
----@field terminal util.terminal
----@field lazygit util.lazygit
+--[[ ---@field terminal util.terminal
+---@field lazygit util.lazygit ]]
 ---@field toggle util.toggle
----@field format util.format ]]
+--[[ ---@field format util.format ]]
 ---@field plugin util.plugin
---[[ ---@field extras util.extras
+--[[ ---@field extras util.extras ]]
 ---@field inject util.inject
----@field news util.news
----@field json util.json
+--[[ ---@field news util.news
+---@field json util.json ]]
 ---@field lualine util.lualine
----@field mini util.mini
+--[[ ---@field mini util.mini ]]
 ---@field pick util.pick
----@field cmp util.cmp ]]
+--[[ ---@field cmp util.cmp ]]
 
 local M = {}
 
@@ -79,8 +79,8 @@ end
 
 ---@param extra string
 function M.has_extra(extra)
-  local Config = require("lazyvim.config")
-  local modname = "lazyvim.plugins.extras." .. extra
+  local Config = require("config")
+  local modname = "plugins.extras." .. extra
   return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
       or vim.tbl_contains(Config.json.data.extras, modname)
 end

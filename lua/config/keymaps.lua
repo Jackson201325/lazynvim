@@ -115,6 +115,8 @@ map("n", "<leader><Right>", "<cmd>vertical resize +2<cr>",
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer", noremap = true, silent = true })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer", noremap = true, silent = true })
 map("n", "<leader>d", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
+
+-- TODO: Fix this
 -- map("n", "<leader>c", "<cmd>lua require('mini.bufremove').delete(0, false)<CR>",
 --   { desc = "Delete Buffer and Window", noremap = true, silent = true })
 
