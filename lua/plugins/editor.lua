@@ -175,7 +175,7 @@ return {
     -- stylua: ignore
     keys = {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      -- { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -194,7 +194,7 @@ return {
         {
           mode = { "n", "v" },
           { "<leader><tab>", group = "tabs" },
-          { "<leader>c", group = "code" },
+          { "<leader>l", group = "lsp" },
           { "<leader>f", group = "file/find" },
           { "<leader>g", group = "git" },
           { "<leader>gh", group = "hunks" },
@@ -328,8 +328,8 @@ return {
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle<cr>",                  desc = "Symbols (Trouble)" },
-      { "<leader>cS", "<cmd>Trouble lsp toggle<cr>",                      desc = "LSP references/definitions/... (Trouble)" },
+      { "<leader>ls", "<cmd>Trouble symbols toggle<cr>",                  desc = "Symbols (Trouble)" },
+      { "<leader>lS", "<cmd>Trouble lsp toggle<cr>",                      desc = "LSP references/definitions/... (Trouble)" },
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>",                  desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>",                   desc = "Quickfix List (Trouble)" },
       {
@@ -382,11 +382,196 @@ return {
   },
 
   {
-    import = "plugins.extras.editor.fzf",
-    enabled = function()
-      return LazyVim.pick.want() == "fzf"
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
+
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      local status_ok, toggleterm = pcall(require, "toggleterm")
+      if not status_ok then
+        return
+      end
+
+      local terminal = require("toggleterm.terminal").Terminal
+
+      local lazygit = terminal:new({
+        cmd = "lazygit",
+        dir = "git_dir",
+        direction = "float",
+        float_opts = {
+          border = "none",
+        },
+        -- function to run on opening the terminal
+        on_open = function(term)
+          vim.cmd("startinsert!")
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+        end,
+        -- function to run on closing the terminal
+        on_close = function()
+          vim.cmd("startinsert!")
+        end,
+      })
+
+      function LAZYGIT_TOGGLE()
+        lazygit:toggle()
+      end
+
+      local npm_server = terminal:new({
+        cmd = "npm run dev",
+        close_on_exit = true,
+        direction = "float",
+        hidden = true,
+      })
+
+      function NPM_SERVER_TOGGLE()
+        npm_server:toggle()
+      end
+
+      local yarn_server = terminal:new({
+        cmd = "yarn start",
+        close_on_exit = true,
+        direction = "float",
+        hidden = true,
+      })
+
+      function YARN_SERVER_TOGGLE()
+        yarn_server:toggle()
+      end
+
+      local foreman = terminal:new({
+        cmd = "bundle exec foreman start web",
+        close_on_exit = true,
+        direction = "float",
+        hidden = true,
+      })
+
+      function RAILS_FOREMAN_TOGGLE()
+        foreman:toggle()
+      end
+
+      local rails_routes = terminal:new({
+        cmd = "bundle exec rails routes",
+        close_on_exit = false,
+        direction = "float",
+      })
+
+      function RAILS_ROUTES_TOGGLE()
+        rails_routes:toggle()
+      end
+
+      local rails_console = terminal:new({
+        cmd = "bundle exec rails c",
+        hidden = true,
+        direction = "float",
+        close_on_exit = true,
+      })
+
+      function RAILS_CONSOLE_TOGGLE()
+        rails_console:toggle()
+      end
+
+      local byebug_server = terminal:new({
+        cmd = "bundle exec byebug -R localhost:8989",
+        close_on_exit = true,
+        direction = "float",
+        hidden = true,
+      })
+
+      function BYEBUG_SERVER_TOGGLE()
+        byebug_server:toggle()
+      end
+
+      local rails_server = terminal:new({
+        cmd = "bundle exec rails s",
+        close_on_exit = false,
+        direction = "float",
+        hidden = true,
+      })
+
+      function RAILS_SERVER_TOGGLE()
+        rails_server:toggle()
+      end
+
+      local docker_up = terminal:new({
+        cmd = "docker-compose up",
+        close_on_exit = false,
+        direction = "float",
+        hidden = true,
+        auto_scroll = false
+      })
+
+      function DOCKER_UP_TOGGLE()
+        docker_up:toggle()
+      end
+
+      local docker_bash = terminal:new({
+        cmd = "docker-compose run --rm web bash",
+        close_on_exit = false,
+        direction = "float",
+        hidden = true,
+      })
+
+      function DOCKER_BASH_TOGGLE()
+        docker_bash:toggle()
+      end
+
+      local htop = terminal:new({ direction = "float", cmd = "htop", hidden = true })
+
+      function HTOP_TOGGLE()
+        htop:toggle()
+      end
+
+      toggleterm.setup({
+        size = 20,
+        open_mapping = [[<c-t>]],
+        hide_numbers = true,
+        -- persist_mode = true,
+        shade_filetypes = {},
+        auto_scroll = false, -- automatically scroll to the bottom on terminal output
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        direction = "horizontal",
+        close_on_exit = true,
+        -- shell = vim.o.shell,
+        float_opts = {
+          border = "none",
+          winblend = 0,
+          highlights = {
+            border = "normal",
+            background = "normal",
+          },
+        },
+      })
+
+      -- Key Mappings
+      local map = vim.api.nvim_set_keymap
+      local opts = { noremap = true, silent = true }
+
+      map('n', '<leader>rb', '<cmd>lua DOCKER_BASH_TOGGLE()<cr>', opts)
+      map('n', '<leader>rd', '<cmd>lua DOCKER_UP_TOGGLE()<cr>', opts)
+      map('n', '<leader>rf', '<cmd>lua RAILS_FOREMAN_TOGGLE()<cr>', opts)
+      map('n', '<leader>rn', '<cmd>lua NPM_SERVER_TOGGLE()<cr>', opts)
+      map('n', '<leader>rrb', '<cmd>lua BYEBUG_SERVER_TOGGLE()<cr>', opts)
+      map('n', '<leader>rrc', '<cmd>lua RAILS_CONSOLE_TOGGLE()<cr>', opts)
+      map('n', '<leader>rrr', '<cmd>lua RAILS_ROUTES_TOGGLE()<cr>', opts)
+      map('n', '<leader>rs', '<cmd>lua RAILS_SERVER_TOGGLE()<cr>', opts)
+      map('n', '<leader>ry', '<cmd>lua YARN_SERVER_TOGGLE()<cr>', opts)
     end,
   },
+
   {
     import = "plugins.extras.editor.telescope",
     enabled = function()

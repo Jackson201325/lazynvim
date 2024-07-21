@@ -22,8 +22,9 @@ map("n", "vw", "viw", opts)
 map("n", "vp", 'viw"_dP', opts)
 map("n", "dw", "diw", opts)
 map("n", "dW", "diW", opts)
-map("n", "yw", "yiw", opts)
-map("n", "yW", "yiW", opts)
+
+-- map("n", "yw", "yiw", opts)
+-- map("n", "yW", "yiW", opts)
 -- map("n", "cw", "ciw", opts)
 -- map("n", "cW", "ciW", opts)
 
@@ -73,7 +74,6 @@ map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", noremap = tru
 map("n", "<leader>=", "<C-w>=", { desc = "Split Equal" })
 map("n", "<leader>\\", "<C-w>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
-
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
 map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
@@ -204,7 +204,7 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+-- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "gl", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "gL", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 -- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
@@ -224,9 +224,7 @@ end, { desc = "Lazygit Log" })
 map("n", "<leader>gL", function()
   LazyVim.lazygit({ args = { "log" } })
 end, { desc = "Lazygit Log (cwd)" })
--- -- LazyVim Changelog
--- -- map("n", "<leader>L", function() LazyVim.news.changelog() end, { desc = "LazyVim Changelog" })
---
+
 -- floating terminal
 local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
 map("n", "<leader>ft", lazyterm, { desc = "Terminal (Root Dir)" })
