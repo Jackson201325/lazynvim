@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
---
+
 -- -- Minus Plus
 keymap.set("n", "-", "<C-x>", opts)
 keymap.set("n", "=", "<C-a>", opts)
@@ -18,17 +18,17 @@ keymap.set({ "n", "v" }, "c", '"_c', opts)
 -- Do not yank with dd
 keymap.set("n", "dd", '"_dd', opts)
 --
-keymap.set({ "n" }, "vw", "viw")
-keymap.set({ "n" }, "vp", 'viw"_dP')
+keymap.set({ "n" }, "vw", "viw", opts)
+keymap.set({ "n" }, "vp", 'viw"_dP', opts)
 --
-keymap.set({ "n" }, "dw", "diw")
-keymap.set({ "n" }, "dW", "diW")
+keymap.set({ "n" }, "dw", "diw", opts)
+keymap.set({ "n" }, "dW", "diW", opts)
 
-keymap.set({ "n" }, "yw", "yiw")
-keymap.set({ "n" }, "yW", "yiW")
+keymap.set({ "n" }, "yw", "yiw", opts)
+keymap.set({ "n" }, "yW", "yiW", opts)
 
-keymap.set({ "n" }, "cw", "ciw")
-keymap.set({ "n" }, "cW", "ciW")
+keymap.set({ "n" }, "cw", "ciw", opts)
+keymap.set({ "n" }, "cW", "ciW", opts)
 
 -- --To set in the cursor in the middle when jumping
 -- keymap.set("n", "(", "{zz", opts)
@@ -53,20 +53,6 @@ keymap.set("x", "p", '"_dP', opts)
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", opts)
 
--- Move Lines
-keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
-keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
-keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
-keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-
--- save file
-keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
-
--- quit
-keymap.set("n", "<c-q>", ":qa<cr>", { desc = "Quit all" })
-
 -- Faster esc
 keymap.set("i", "jj", "<cmd>noh<cr><ESC>", opts)
 keymap.set("i", "kk", "<cmd>noh<cr><ESC>", opts)
@@ -75,15 +61,29 @@ keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
 
 keymap.set("n", "0", "^", opts)
 
+-- save file
+keymap.set({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
+
+-- better indenting
+keymap.set("v", ">", ">gv", opts)
+keymap.set("v", "<", "<gv", opts)
+
+-- Move Lines
+keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+
+-- quit
+keymap.set("n", "<c-q>", ":qa<cr>", { desc = "Quit all" })
+
 -- Move to window using the <ctrl> hjkl keys
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true, silent = true })
 keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", noremap = true, silent = true })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", noremap = true, silent = true })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true, silent = true })
-
--- better indenting
-keymap.set("v", ">", ">gv", opts)
-keymap.set("v", "<", "<gv", opts)
 
 -- search word under cursor
 keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", noremap = true, silent = true })
@@ -91,6 +91,7 @@ keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor", norema
 -- move
 keymap.set("n", "<S-h>", ":bprevious<cr>", { desc = "Prev buffer", noremap = true, silent = true })
 keymap.set("n", "<S-l>", ":bnext<cr>", { desc = "Next buffer", noremap = true, silent = true })
+
 
 -- Lazy Stuff
 
