@@ -71,14 +71,14 @@ return {
           ["l"] = "open",
           ["h"] = "close_node",
           ["<space>"] = "none",
-          ["Y"] = {
-            function(state)
-              local node = state.tree:get_node()
-              local path = node:get_id()
-              vim.fn.setreg("+", path, "c")
-            end,
-            desc = "Copy Path to Clipboard",
-          },
+          -- ["Y"] = {
+          --   function(state)
+          --     local node = state.tree:get_node()
+          --     local path = node:get_id()
+          --     vim.fn.setreg("+", path, "c")
+          --   end,
+          --   desc = "Copy Path to Clipboard",
+          -- },
           ["O"] = {
             function(state)
               require("lazy.util").open(state.tree:get_node().path, { system = true })
@@ -381,18 +381,7 @@ return {
     },
   },
 
-  {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
-  },
-
-
+  -- Toggle Termminal
   {
     "akinsho/toggleterm.nvim",
     version = "*",

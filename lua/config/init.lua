@@ -292,7 +292,7 @@ function M.init()
   M.load("options")
   -- defer built-in clipboard handling: "xsel" and "pbcopy" can be slow
   lazy_clipboard = vim.opt.clipboard
-  vim.opt.clipboard = ""
+  vim.opt.clipboard = "unnamedplus"
 
   if vim.g.deprecation_warnings == false then
     vim.deprecate = function() end

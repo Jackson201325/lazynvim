@@ -32,14 +32,11 @@ opt.background = "dark"
 opt.backspace = "indent,eol,start"
 
 opt.autowrite = true
--- opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 -- opt.cmdheight = 0            -- More space for displaying messages
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 3 -- Hide * markup for bold and italic
-opt.confirm = true   -- Confirm to save changes before exiting modified buffer
-opt.foldlevel = 99
-opt.foldlevelstart = 99
+opt.conceallevel = 3           -- Hide * markup for bold and italic
+opt.confirm = true             -- Confirm to save changes before exiting modified buffer
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -70,3 +67,23 @@ opt.laststatus = 3 -- global statusline
 opt.spelloptions:append("noplainbuffer")
 opt.splitkeep = "screen"
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+
+
+opt.foldlevelstart = 99
+opt.foldcolumn = '0' -- '0' is not bad
+opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+opt.foldenable = true
+
+
+
+-- if vim.fn.has("nvim-0.10") == 1 then
+--   print("Using neovim 0.10")
+--   opt.smoothscroll = true
+--   opt.foldexpr = "v:lua.require'util'.ui.foldexpr()"
+--   opt.foldmethod = "expr"
+--   opt.foldtext = ""
+-- else
+--   print("Not using neovim 0.10")
+--   opt.foldmethod = "indent"
+--   opt.foldtext = "v:lua.require'util'.ui.foldtext()"
+-- end

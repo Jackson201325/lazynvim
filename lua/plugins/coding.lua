@@ -1,9 +1,38 @@
+local handler = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
+  local suffix = (" 󰁂 %d "):format(endLnum - lnum)
+  local sufWidth = vim.fn.strdisplaywidth(suffix)
+  local targetWidth = width - sufWidth
+  local curWidth = 0
+  for _, chunk in ipairs(virtText) do
+    local chunkText = chunk[1]
+    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    if targetWidth > curWidth + chunkWidth then
+      table.insert(newVirtText, chunk)
+    else
+      chunkText = truncate(chunkText, targetWidth - curWidth)
+      local hlGroup = chunk[2]
+      table.insert(newVirtText, { chunkText, hlGroup })
+      chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      -- str width returned from truncate() may less than 2nd argument, need padding
+      if curWidth + chunkWidth < targetWidth then
+        suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+      end
+      break
+    end
+    curWidth = curWidth + chunkWidth
+  end
+  table.insert(newVirtText, { suffix, "MoreMsg" })
+  return newVirtText
+end
+
 return {
 
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
+    lazy = true,
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -152,6 +181,82 @@ return {
     opts = {},
   },
 
+  -- ys actions
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "InsertEnter",
+    opts = {}
+  },
+
+  -- ys actions
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    lazy = true,
+    event = "VeryLazy",
+    opts = {
+      open_fold_hl_timeout = 150,
+      close_fold_kinds = {},
+      preview = {
+        win_config = {
+          border = { "", "─", "", "", "", "─", "", "" },
+          winhighlight = "Normal:Folded",
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = "<C-u>",
+          scrollD = "<C-d>",
+          jumpTop = "[",
+          jumpBot = "]",
+        },
+      },
+      fold_virt_text_handler = handler,
+      provider_selector = function(bufnr, filetype, buftype)
+        -- if you prefer treesitter provider rather than lsp,
+        -- return ftMap[filetype] or {'treesitter', 'indent'}
+        -- return ftMap[filetype]
+        return { "lsp", "indent" }
+      end,
+      enable_get_fold_virt_text = true
+
+    },
+    keys = {
+      {
+        "zr",
+        function()
+          require("ufo").openFoldsExceptKinds()
+        end,
+        mode = { "n", "v" },
+        desc = "Fold less",
+      },
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        mode = { "n", "v" },
+        desc = "Open All Folds",
+      },
+      {
+        "zm",
+        function()
+          require("ufo").closeFoldsWith()
+        end,
+        mode = { "n", "v" },
+        desc = "Fold more",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        mode = { "n", "v" },
+        desc = "Close All Folds",
+      }
+    },
+  },
+
   -- Better text-objects
   {
     "echasnovski/mini.ai",
@@ -189,6 +294,8 @@ return {
       end)
     end,
   },
+
+  -- folding
 
   {
     "folke/lazydev.nvim",

@@ -44,7 +44,7 @@ return {
         -- Be aware that you also will need to properly configure your LSP server to
         -- provide the code lenses.
         codelens = {
-          enabled = false,
+          enabled = true,
         },
         -- Enable lsp cursor word highlighting
         document_highlight = {
@@ -100,7 +100,7 @@ return {
               },
             },
           },
-          biome = {},
+          -- biome = {},
           graphql = {},
         },
         -- you can do any additional lsp server setup here
@@ -269,7 +269,7 @@ return {
       ensure_installed = {
         "stylua",
         "shfmt",
-        "biome",
+        -- "biome",
         "dockerfile-language-server",
         "elixir-ls",
         -- "graphql-language-server-cli",
