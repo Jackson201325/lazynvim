@@ -42,6 +42,11 @@ return {
 					enabled = formatter == "standardrb",
 				},
 			},
+			setup = {
+				LazyVim.lsp.on_attach(function(client, _)
+					client.server_capabilities.documentFormattingProvider = false
+				end, "solargraph"),
+			},
 		},
 	},
 	{

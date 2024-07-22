@@ -53,6 +53,28 @@ return {
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
+
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						options = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
+
 			return {
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {
@@ -64,6 +86,15 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
+					["<C-k>"] = cmp.mapping({
+						i = function()
+							if cmp.visible() then
+								cmp.abort()
+							else
+								cmp.complete()
+							end
+						end,
+					}),
 					["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
 					["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<C-CR>"] = function(fallback)
@@ -78,6 +109,12 @@ return {
 					{ name = "buffer" },
 				}),
 				formatting = {
+					pandable_indicator = true,
+					fields = { "abbr", "kind", "menu" },
+					-- format = function(entry, vim_item)
+					-- 	vim_item.menu = lspkind.presets.default[vim_item.kind]
+					-- 	return vim_item
+					-- end,
 					format = function(entry, item)
 						local icons = LazyVim.config.icons.kinds
 						if icons[item.kind] then
@@ -97,6 +134,10 @@ return {
 
 						return item
 					end,
+				},
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
 				},
 				experimental = {
 					ghost_text = {
