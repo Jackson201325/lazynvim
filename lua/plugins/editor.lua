@@ -18,7 +18,7 @@ return {
 				end,
 				desc = "Explorer NeoTree (cwd)",
 			},
-			{ "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
+			{ "<leader>e", "<cmd>Neotree reveal<cr>", desc = "Explorer NeoTree (Root Dir)", remap = true },
 			{ "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
 			{
 				"<leader>ge",
@@ -66,7 +66,25 @@ return {
 				follow_current_file = { enabled = true },
 				use_libuv_file_watcher = true,
 			},
+			buffers = {
+				bind_to_cwd = true,
+				follow_current_file = {
+					enabled = true,
+				}, -- This will find and focus the file in the active buffer every time
+				-- the current file is changed while the tree is open.
+				group_empty_dirs = true, -- when true, empty directories will be grouped together
+				show_unloaded = false, -- When working with sessions, for example, restored but unfocused buffers
+				-- are mark as "unloaded". Turn this on to view these unloaded buffer.
+				window = {
+					mappings = {
+						["<bs>"] = "navigate_up",
+						["."] = "set_root",
+						["bd"] = "buffer_delete",
+					},
+				},
+			},
 			window = {
+				follow_current_file = true, -- This will find and focus the file in the active buffer every time
 				mappings = {
 					["l"] = "open",
 					["h"] = "close_node",
@@ -568,6 +586,91 @@ return {
 			map("n", "<leader>rrr", "<cmd>lua RAILS_ROUTES_TOGGLE()<cr>", opts)
 			map("n", "<leader>rs", "<cmd>lua RAILS_SERVER_TOGGLE()<cr>", opts)
 			map("n", "<leader>ry", "<cmd>lua YARN_SERVER_TOGGLE()<cr>", opts)
+		end,
+	},
+
+	{
+		"xiyaowong/transparent.nvim",
+		lazy = false,
+		event = "LazyFile",
+		cmd = "TransparentEnable",
+		opts = {
+			groups = { -- table: default groups
+				"BqfPreviewBorder",
+				"BqfPreviewThumb",
+				"BqfPreviewTitle",
+				"Comment",
+				"Conditional",
+				"Constant",
+				"EndOfBuffer",
+				"Float",
+				"FloatBorder",
+				"FloatBorderNC",
+				"Function",
+				"Identifier",
+				"LspSagaBorderTitle",
+				"LspSagaCodeActionBorder",
+				"LspSagaCodeActionTitle",
+				"LspSagaFinderSelection",
+				"LspSagaHoverBorder",
+				"LspSagaRenameBorder",
+				"NonText",
+				"Normal",
+				"NormalFloat",
+				"NormalNC",
+				"Operator",
+				"PreProc",
+				"Repeat",
+				"SignColumn",
+				"Special",
+				"Statement",
+				"String",
+				"Structure",
+				"Todo",
+				"Type",
+				"UfoFoldedBg",
+				"UfoFoldedFg",
+				"UfoPreviewCursorLine",
+				"UfoPreviewSbar",
+				"UfoPreviewThumb",
+			},
+			extra_groups = {
+				"BqfPreviewBorder",
+				"BqfPreviewThumb",
+				"BqfPreviewTitle",
+				"CursorColumn",
+				"Float",
+				"FloatBorder",
+				"FloatBorderNC",
+				"Folded",
+				"LspSagaBorderTitle",
+				"LspSagaCodeActionBorder",
+				"LspSagaCodeActionTitle",
+				"LspSagaFinderSelection",
+				"LspSagaFinderSelection",
+				"LspSagaHoverBorder",
+				"LspSagaHoverBorder",
+				"LspSagaPreviewBorder",
+				"LspSagaRenameBorder",
+				"NeoTreeNormal",
+				"NormalFloat",
+				"StatusLine",
+				"StatusLineNC",
+				"TelescopeNormal",
+				"TelescopePromptBorder",
+				"UfoFoldedBg",
+				"UfoFoldedFg",
+				"UfoPreviewCursorLine",
+				"UfoPreviewSbar",
+				"UfoPreviewThumb",
+				"WhichKey",
+				"WhichKeyFloat",
+				-- "ToolbarLine",
+			}, -- table: additional groups that should be cleared
+			exclude_groups = {}, -- table: groups you don't want to clear
+		},
+		config = function(_, opts)
+			require("transparent").setup(opts)
 		end,
 	},
 

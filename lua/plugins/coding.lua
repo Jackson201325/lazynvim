@@ -54,27 +54,27 @@ return {
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
 
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{
-						name = "cmdline",
-						options = {
-							ignore_cmds = { "Man", "!" },
-						},
-					},
-				}),
-			})
-
+			-- cmp.setup.cmdline({ "/", "?" }, {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = {
+			-- 		{ name = "buffer" },
+			-- 	},
+			-- })
+			--
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 	}, {
+			-- 		{
+			-- 			name = "cmdline",
+			-- 			options = {
+			-- 				ignore_cmds = { "Man", "!" },
+			-- 			},
+			-- 		},
+			-- 	}),
+			-- })
+			--
 			return {
 				auto_brackets = {}, -- configure any filetype to auto add brackets
 				completion = {

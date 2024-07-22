@@ -360,6 +360,8 @@ return {
 							["<c-h>"] = find_files_with_hidden,
 							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
 
 							["<C-Down>"] = actions.cycle_history_next,
 							["<C-Up>"] = actions.cycle_history_prev,
@@ -371,6 +373,10 @@ return {
 						},
 						n = {
 							["q"] = actions.close,
+							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
 						},
 					},
 				},
