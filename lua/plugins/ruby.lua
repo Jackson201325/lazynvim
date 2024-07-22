@@ -43,9 +43,18 @@ return {
 				},
 			},
 			setup = {
-				LazyVim.lsp.on_attach(function(client, _)
-					client.server_capabilities.documentFormattingProvider = false
-				end, "solargraph"),
+				solargraph = function(_, opts)
+					opts.on_attach = function(client, bufnr)
+						-- Disable only solargraph diagnostics
+						vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+
+						-- Call the original on_attach function if it exists
+						if LazyVim.lsp.on_attach then
+							LazyVim.lsp.on_attach(client, bufnr)
+						end
+					end
+					return false
+				end,
 			},
 		},
 	},

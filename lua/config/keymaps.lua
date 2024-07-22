@@ -22,11 +22,10 @@ map("n", "vw", "viw", opts)
 map("n", "vp", 'viw"_dP', opts)
 map("n", "dw", "diw", opts)
 map("n", "dW", "diW", opts)
-
--- map("n", "yw", "yiw", opts)
--- map("n", "yW", "yiW", opts)
--- map("n", "cw", "ciw", opts)
--- map("n", "cW", "ciW", opts)
+map("n", "yw", "yiw", opts)
+map("n", "yW", "yiW", opts)
+map("n", "cw", "ciw", opts)
+map("n", "cW", "ciW", opts)
 
 --To set in the cursor in the middle when jumping
 map({ "n", "v" }, ")", "{", opts)
@@ -57,12 +56,12 @@ map("n", "0", "^", opts)
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down", noremap = true, silent = true })
-map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up", noremap = true, silent = true })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down", noremap = true, silent = true })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up", noremap = true, silent = true })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down", noremap = true, silent = true })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up", noremap = true, silent = true })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Down", noremap = true, silent = true })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move Up", noremap = true, silent = true })
+map("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move Down", noremap = true, silent = true })
+map("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move Up", noremap = true, silent = true })
+map("i", "<A-Down>", "<esc>:m .+1<CR>==", { desc = "Move Down", noremap = true, silent = true })
+map("i", "<A-Up>", "<esc>:m .-2<CR>==", { desc = "Move Up", noremap = true, silent = true })
 
 -- quit
 map("n", "<c-q>", ":qa<cr>", { desc = "Quit all", noremap = true, silent = true })
@@ -77,9 +76,12 @@ map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
 map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
-map("n", "<leader>bb",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-  { desc = "Buffers" })
+map(
+	"n",
+	"<leader>bb",
+	"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+	{ desc = "Buffers" }
+)
 map("n", "<leader>c", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 map("n", "<leader>x", "<cmd>exit<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 
@@ -102,12 +104,14 @@ LazyVim.toggle.map("<leader>uw", LazyVim.toggle("wrap", { name = "Wrap" }))
 LazyVim.toggle.map("<leader>uL", LazyVim.toggle("relativenumber", { name = "Relative Number" }))
 LazyVim.toggle.map("<leader>ud", LazyVim.toggle.diagnostics)
 LazyVim.toggle.map("<leader>ul", LazyVim.toggle.number)
-LazyVim.toggle.map("<leader>uc",
-  LazyVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
+LazyVim.toggle.map(
+	"<leader>uc",
+	LazyVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } })
+)
 LazyVim.toggle.map("<leader>uT", LazyVim.toggle.treesitter)
 LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
 if vim.lsp.inlay_hint then
-  LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
+	LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
 end
 
 -- highlights under cursor
@@ -121,10 +125,18 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map("n", "<leader><Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height", noremap = true, silent = true })
 map("n", "<leader><Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height", noremap = true, silent = true })
-map("n", "<leader><Left>", "<cmd>vertical resize -2<cr>",
-  { desc = "Decrease Window Width", noremap = true, silent = true })
-map("n", "<leader><Right>", "<cmd>vertical resize +2<cr>",
-  { desc = "Increase Window Width", noremap = true, silent = true })
+map(
+	"n",
+	"<leader><Left>",
+	"<cmd>vertical resize -2<cr>",
+	{ desc = "Decrease Window Width", noremap = true, silent = true }
+)
+map(
+	"n",
+	"<leader><Right>",
+	"<cmd>vertical resize +2<cr>",
+	{ desc = "Increase Window Width", noremap = true, silent = true }
+)
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch", noremap = true, silent = true })
@@ -171,8 +183,12 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<c-w>d", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- lazygit
-map("n", "<leader>gg", function() LazyVim.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gG", function() LazyVim.lazygit() end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function()
+	LazyVim.lazygit({ cwd = LazyVim.root.git() })
+end, { desc = "Lazygit (Root Dir)" })
+map("n", "<leader>gG", function()
+	LazyVim.lazygit()
+end, { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
 map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
 map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
@@ -185,24 +201,24 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 
 -- formatting
 map({ "n", "v" }, "<leader>w", function()
-  LazyVim.format({ force = true })
+	LazyVim.format({ force = true })
 end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
 end
 -- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "gl", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -214,21 +230,25 @@ map("n", "gL", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 
 -- -- stylua: ignore start
 map("n", "<leader>gf", function()
-  local git_path = vim.api.nvim_buf_get_name(0)
-  LazyVim.lazygit({ args = { "-f", vim.trim(git_path) } })
+	local git_path = vim.api.nvim_buf_get_name(0)
+	LazyVim.lazygit({ args = { "-f", vim.trim(git_path) } })
 end, { desc = "Lazygit Current File History" })
 
 map("n", "<leader>gl", function()
-  LazyVim.lazygit({ args = { "log" }, cwd = LazyVim.root.git() })
+	LazyVim.lazygit({ args = { "log" }, cwd = LazyVim.root.git() })
 end, { desc = "Lazygit Log" })
 map("n", "<leader>gL", function()
-  LazyVim.lazygit({ args = { "log" } })
+	LazyVim.lazygit({ args = { "log" } })
 end, { desc = "Lazygit Log (cwd)" })
 
 -- floating terminal
-local lazyterm = function() LazyVim.terminal(nil, { cwd = LazyVim.root() }) end
+local lazyterm = function()
+	LazyVim.terminal(nil, { cwd = LazyVim.root() })
+end
 map("n", "<leader>ft", lazyterm, { desc = "Terminal (Root Dir)" })
-map("n", "<leader>fT", function() LazyVim.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>fT", function()
+	LazyVim.terminal()
+end, { desc = "Terminal (cwd)" })
 map("n", "<c-/>", lazyterm, { desc = "Terminal (Root Dir)" })
 map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 --
