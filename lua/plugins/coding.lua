@@ -27,7 +27,6 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 end
 
 return {
-
 	-- auto completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -340,7 +339,11 @@ return {
 		end,
 	},
 
-	-- folding
+	{
+		"mg979/vim-visual-multi",
+		branch = "master",
+		event = "LazyFile",
+	},
 
 	{
 		"folke/lazydev.nvim",
