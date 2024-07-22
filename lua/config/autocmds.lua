@@ -135,8 +135,6 @@ vim.filetype.add({
   },
 })
 
-vim.cmd [[highlight UfoFoldedBg guibg=NONE]]
-
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("bigfile"),
   pattern = "bigfile",

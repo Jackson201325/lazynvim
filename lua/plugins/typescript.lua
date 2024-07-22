@@ -3,7 +3,7 @@ return {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     lazy = true,
-    event = "InsertEnter",
+    event = "LazyFile",
     opts = {
       on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = false
