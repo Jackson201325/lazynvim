@@ -12,12 +12,12 @@ local LazyUtil = require("lazy.core.util")
 ---@field plugin util.plugin
 ---@field extras util.extras
 ---@field inject util.inject
---[[ ---@field news util.news
----@field json util.json ]]
+--[[ ---@field news util.news ]]
+---@field json util.json
 ---@field lualine util.lualine
---[[ ---@field mini util.mini ]]
+---@field mini util.mini
 ---@field pick util.pick
---[[ ---@field cmp util.cmp ]]
+---@field cmp util.cmp
 
 local M = {}
 
