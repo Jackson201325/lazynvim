@@ -74,7 +74,7 @@ map("n", "<leader>=", "<C-w>=", { desc = "Split Equal" })
 map("n", "<leader>\\", "<C-w>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
-map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
+map("n", "<leader>C", '<cmd>%bdelete|edit #|normal `"<CR>', { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map(
 	"n",

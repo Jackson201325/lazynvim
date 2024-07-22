@@ -119,6 +119,7 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
 		dependencies = {
 			{ "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
 		},
