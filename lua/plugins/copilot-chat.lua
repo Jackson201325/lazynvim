@@ -28,8 +28,19 @@ return {
 				show_help = true,
 				question_header = "  " .. user .. " ",
 				answer_header = "  Copilot ",
+				-- default window options
 				window = {
-					width = 0.4,
+					layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
+					width = 0.18, -- fractional width of parent, or absolute width in columns when > 1
+					height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+					-- Options below only apply to floating windows
+					relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
+					border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+					row = nil, -- row position of the window, default is centered
+					col = nil, -- column position of the window, default is centered
+					-- title = "Copilot Chat", -- title of chat window
+					-- footer = nil, -- footer of chat window
+					zindex = 1, -- determines if window is on top or below other floating windows
 				},
 				selection = function(source)
 					local select = require("CopilotChat.select")
@@ -57,6 +68,12 @@ return {
 				mode = { "n", "v" },
 			},
 			{
+				"<leader>ai",
+				":CopilotChatInline<cr>",
+				mode = { "n", "v" },
+				desc = "CopilotChat - Inline chat",
+			},
+			{
 				"<leader>aq",
 				function()
 					local input = vim.fn.input("Quick Chat: ")
@@ -74,6 +91,8 @@ return {
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
+			local select = require("CopilotChat.select")
+
 			require("CopilotChat.integrations.cmp").setup()
 
 			vim.api.nvim_create_autocmd("BufEnter", {
@@ -85,6 +104,19 @@ return {
 			})
 
 			chat.setup(opts)
+
+			vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+				chat.ask(args.args, {
+					selection = select.visual,
+					window = {
+						layout = "float",
+						relative = "cursor",
+						width = 0.6,
+						height = 0.5,
+						row = 1,
+					},
+				})
+			end, { nargs = "*", range = true })
 		end,
 	},
 
@@ -97,7 +129,7 @@ return {
 			table.insert(opts.right, {
 				ft = "copilot-chat",
 				title = "Copilot Chat",
-				size = { width = 50 },
+				size = { width = 30 },
 			})
 		end,
 	},

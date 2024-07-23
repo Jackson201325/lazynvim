@@ -15,6 +15,7 @@ map("n", "x", '"_x', opts)
 
 -- Do not yank with c
 map({ "n", "v" }, "c", '"_c', opts)
+map({ "n", "v" }, "S", '"_S', opts)
 
 -- Do not yank with dd
 map("n", "dd", '"_dd', opts)
@@ -92,7 +93,7 @@ map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
 map("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab><s-tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><s-tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Lazy Stuff
 
