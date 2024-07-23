@@ -14,8 +14,8 @@ function M.get()
   -- stylua: ignore
   M._keys = {
     { "gd",         vim.lsp.buf.definition,                                                                                                                                                           desc = "Goto Definition",            has = "definition" },
-    { "gr",         vim.lsp.buf.references,                                                                                                                                                           desc = "References",                 nowait = true },
-    { "gI",         vim.lsp.buf.implementation,                                                                                                                                                       desc = "Goto Implementation" },
+    -- { "gr",         vim.lsp.buf.references,                                                                                                                                                           desc = "References",                 nowait = true },
+    -- { "gI",         vim.lsp.buf.implementation,                                                                                                                                                       desc = "Goto Implementation" },
     { "gt",         vim.lsp.buf.type_definition,                                                                                                                                                      desc = "Goto T[y]pe Definition" },
     { "gD",         ":vsplit | lua vim.lsp.buf.definition()<cr>",                                                                                                                                     desc = "Go to Definition in Split",  nowait = true,           remap = false },
     { "K",          vim.lsp.buf.hover,                                                                                                                                                                desc = "Hover" },

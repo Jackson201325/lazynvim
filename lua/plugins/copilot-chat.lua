@@ -24,13 +24,19 @@ return {
 			user = user:sub(1, 1):upper() .. user:sub(2)
 			return {
 				model = "gpt-4",
+				mappings = {
+					reset = {
+						normal = "<C-x>",
+						insert = "<C-x>",
+					},
+				},
 				auto_insert_mode = true,
 				show_help = true,
 				question_header = "  " .. user .. " ",
 				answer_header = "  Copilot ",
 				-- default window options
 				window = {
-					layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
+					layout = "horizontal", -- 'vertical', 'horizontal', 'float', 'replace'
 					width = 0.18, -- fractional width of parent, or absolute width in columns when > 1
 					height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
 					-- Options below only apply to floating windows

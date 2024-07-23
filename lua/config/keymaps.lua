@@ -155,6 +155,13 @@ map("i", ",", ",<c-g>u", opts)
 map("i", ".", ".<c-g>u", opts)
 map("i", ";", ";<c-g>u", opts)
 
+map(
+	{ "n", "x" },
+	"fw",
+	"<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>",
+	{ desc = "Find Word in project under cursor", noremap = true, silent = true }
+)
+
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File", noremap = true, silent = true })
 
@@ -193,7 +200,6 @@ end, { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
 map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
 map("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
-
 -- map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
 
 -- commenting

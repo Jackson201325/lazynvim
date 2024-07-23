@@ -59,7 +59,7 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200               -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
--- opt.winbar = "%=%m %f"
+opt.winbar = "%=%m %f"
 opt.winminwidth = 10               -- Minimum window width
 
 opt.jumpoptions = "view"
