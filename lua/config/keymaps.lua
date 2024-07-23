@@ -192,8 +192,9 @@ map("n", "<leader>gG", function()
 end, { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
 map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
-map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
 map("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
+
+-- map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
 
 -- commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })

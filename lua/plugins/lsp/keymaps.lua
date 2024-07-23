@@ -32,7 +32,7 @@ function M.get()
     { "tr",         "<cmd>TSToolsFileReferences<CR>",                                                                                                                                                 desc = "Find references", },
     { "tu",         "<cmd>TSToolsRemoveUnused<CR>",                                                                                                                                                   desc = "Remove Unused Statement", },
 
-    { "<leader>o",  "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 60, previewer = false, initial_mode = normal, layout_config = { width = 0.3, height = 0.2 } })<CR>", desc = "LSP Outline",                mode = { "n" } },
+    { "<leader>o",  "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 70, previewer = false, initial_mode = normal, layout_config = { width = 0.3, height = 0.2 } })<CR>", desc = "LSP Outline",                mode = { "n" } },
     { "<leader>d",  "<cmd>Telescope diagnostics bufnr=0<cr>",                                                                                                                                         desc = "Buffer Diagnostics" },
     { "<leader>lC", vim.lsp.codelens.refresh,                                                                                                                                                         desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
     { "<leader>lL", "<cmd>LspLog<cr>",                                                                                                                                                                desc = "Lsp Log",                    mode = { "n", "v" } },

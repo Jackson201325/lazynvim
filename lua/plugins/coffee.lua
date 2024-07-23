@@ -20,7 +20,9 @@ return {
 		opts = {
 			---@type lspconfig.options
 			servers = {
-				coffeesense = {},
+				coffeesense = {
+          enable = true,
+        },
 			},
 		},
 	},
