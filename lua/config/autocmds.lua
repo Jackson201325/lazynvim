@@ -32,6 +32,23 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("auto_read"),
+	callback = function(event)
+		if vim.bo[event.buf].buftype == "nofile" then
+			return
+		end
+		vim.cmd("silent! checktime")
+		local bufname = vim.api.nvim_buf_get_name(event.buf)
+		local extension = bufname:match("%.(%w+)$")
+		if extension then
+			vim.api.nvim_set_option_value("winbar", "%=%m %f", { scope = "local" })
+		else
+			vim.api.nvim_set_option_value("winbar", "", { scope = "local" })
+		end
+	end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup("last_loc"),
