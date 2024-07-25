@@ -11,7 +11,7 @@ if vim.fn.has("nvim-0.10") == 0 then
 	-- ruby_lsp does not work well with Neovim < 0.10
 	lsp = vim.g.lazyvim_ruby_lsp or "solargraph"
 end
-local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
+-- local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
 
 return {
 	recommended = function()
@@ -30,77 +30,78 @@ return {
 		opts = {
 			---@type lspconfig.options
 			servers = {
-				ruby_lsp = {
-					enabled = lsp == "ruby_lsp",
-				},
+				-- ruby_lsp = {
+				-- 	enabled = lsp == "ruby_lsp",
+				-- },
 				solargraph = {
 					enabled = lsp == "solargraph",
+					-- diagnostics = {
+					-- 	virtual_text = false,
+					-- 	enabled = false,
+					-- },
 				},
-				rubocop = {
-					enabled = formatter == "rubocop",
-				},
-				standardrb = {
-					enabled = formatter == "standardrb",
-				},
+				-- rubocop = {
+				-- 	enabled = formatter == "rubocop",
+				-- },
+				-- standardrb = {
+				-- 	enabled = formatter == "standardrb",
+				-- },
 			},
-			setup = {
-				solargraph = function(_, opts)
-					opts.on_attach = function(client, bufnr)
-						-- Disable only solargraph diagnostics
-						vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-
-						-- Call the original on_attach function if it exists
-						if LazyVim.lsp.on_attach then
-							LazyVim.lsp.on_attach(client, bufnr)
-						end
-					end
-					return false
-				end,
-			},
+			setup = {},
 		},
 	},
 	{
 		"williamboman/mason.nvim",
 		opts = { ensure_installed = { "erb-formatter", "erb-lint" } },
 	},
-	{
-		"mfussenegger/nvim-dap",
-		optional = true,
-		dependencies = {
-			"suketa/nvim-dap-ruby",
-			config = function()
-				require("dap-ruby").setup()
-			end,
-		},
-	},
-	{
-		"stevearc/conform.nvim",
-		opts = {
-			formatters_by_ft = {
-				ruby = { formatter },
-				eruby = { "erb-format" },
-			},
-		},
-	},
-	{
-		"nvim-neotest/neotest",
-		optional = true,
-		dependencies = {
-			"olimorris/neotest-rspec",
-		},
-		opts = {
-			adapters = {
-				["neotest-rspec"] = {
-					-- NOTE: By default neotest-rspec uses the system wide rspec gem instead of the one through bundler
-					-- rspec_cmd = function()
-					--   return vim.tbl_flatten({
-					--     "bundle",
-					--     "exec",
-					--     "rspec",
-					--   })
-					-- end,
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"mfussenegger/nvim-dap",
+	-- 	optional = true,
+	-- 	dependencies = {
+	-- 		"suketa/nvim-dap-ruby",
+	-- 		config = function()
+	-- 			require("dap-ruby").setup()
+	-- 		end,
+	-- 	},
+	-- },
+	-- {
+	-- 	"stevearc/conform.nvim",
+	-- 	opts = {
+	-- 		formatters_by_ft = {
+	-- 			ruby = { "rubocop" },
+	-- 			eruby = { "erb-format" },
+	-- 		},
+	-- 	},
+	-- },
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	-- optional = true,
+	-- 	opts = {
+	-- 		linters_by_ft = {
+	-- 			ruby = { "rubocop" },
+	-- 			eruby = { "erb-format" },
+	-- 		},
+	-- 	},
+	-- },
+	-- {
+	-- 	"nvim-neotest/neotest",
+	-- 	optional = true,
+	-- 	dependencies = {
+	-- 		"olimorris/neotest-rspec",
+	-- 	},
+	-- 	opts = {
+	-- 		adapters = {
+	-- 			["neotest-rspec"] = {
+	-- 				-- NOTE: By default neotest-rspec uses the system wide rspec gem instead of the one through bundler
+	-- 				-- rspec_cmd = function()
+	-- 				--   return vim.tbl_flatten({
+	-- 				--     "bundle",
+	-- 				--     "exec",
+	-- 				--     "rspec",
+	-- 				--   })
+	-- 				-- end,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 }

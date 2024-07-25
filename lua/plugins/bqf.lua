@@ -48,15 +48,15 @@ return {
 	"kevinhwang91/nvim-bqf",
 	ft = "qf",
 	opts = {
-		auto_enable = false,
+		auto_enable = true,
 		auto_resize_height = true,
 		preview = {
 			win_height = 12,
 			win_vheight = 12,
 			delay_syntax = 80,
-			border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+			-- border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
 			show_title = false,
-			should_preview_cb = function(bufnr, qwinid)
+			should_preview_cb = function(bufnr, _qwinid)
 				local ret = true
 				local bufname = vim.api.nvim_buf_get_name(bufnr)
 				local fsize = vim.fn.getfsize(bufname)

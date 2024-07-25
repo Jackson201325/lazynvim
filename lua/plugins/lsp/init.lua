@@ -37,8 +37,8 @@ return {
 				-- Be aware that you also will need to properly configure your LSP server to
 				-- provide the inlay hints.
 				inlay_hints = {
-					enabled = true,
-					exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+					enabled = false,
+					-- exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
 				},
 				-- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
 				-- Be aware that you also will need to properly configure your LSP server to
@@ -147,7 +147,7 @@ return {
 			if vim.fn.has("nvim-0.10") == 1 then
 				-- inlay hints
 				if opts.inlay_hints.enabled then
-					LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+					LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(_, buffer)
 						if
 							vim.api.nvim_buf_is_valid(buffer)
 							and vim.bo[buffer].buftype == ""
@@ -160,7 +160,7 @@ return {
 
 				-- code lens
 				if opts.codelens.enabled and vim.lsp.codelens then
-					LazyVim.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+					LazyVim.lsp.on_supports_method("textDocument/codeLens", function(_, buffer)
 						vim.lsp.codelens.refresh()
 						vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
 							buffer = buffer,

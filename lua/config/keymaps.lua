@@ -18,7 +18,7 @@ map({ "n", "v" }, "c", '"_c', opts)
 map({ "n", "v" }, "S", '"_S', opts)
 
 -- Do not yank with dd
-map("n", "dd", '"_dd', opts)
+-- map("n", "dd", '"_dd', opts)
 map("n", "vw", "viw", opts)
 map("n", "vp", 'viw"_dP', opts)
 map("n", "dw", "diw", opts)
@@ -84,12 +84,13 @@ map(
 	{ desc = "Buffers" }
 )
 map("n", "<leader>c", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
-map("n", "<leader>x", "<cmd>exit<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
+map("n", "<c-x>", "<cmd>exit<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
 map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>c", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab><tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
@@ -179,7 +180,7 @@ map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy", noremap = true, silent =
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", noremap = true, silent = true })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List", noremap = true, silent = true })
-map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List", noremap = true, silent = true })
+map("n", "<leader>q", "<cmd>copen<cr>", { desc = "Quickfix List", noremap = true, silent = true })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix", noremap = true, silent = true })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix", noremap = true, silent = true })
