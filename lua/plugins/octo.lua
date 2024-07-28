@@ -20,9 +20,8 @@ return {
 			{ "<leader>gp", "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
 			{ "<leader>gP", "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
 			{ "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
-			{ "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
+			{ "<leader>go", "<cmd>Octo<CR>", desc = "Search (Octo)" },
 
-      { "<leader>O", "<leader>Octo<cr>", desc = "Search (Octo)" },
 			{ "<leader>a", "", desc = "+assignee (Octo)", ft = "octo" },
 			{ "<leader>c", "", desc = "+comment/code (Octo)", ft = "octo" },
 			{ "<leader>l", "", desc = "+label (Octo)", ft = "octo" },
@@ -52,7 +51,7 @@ return {
 			-- Keep some empty windows in sessions
 			vim.api.nvim_create_autocmd("ExitPre", {
 				group = vim.api.nvim_create_augroup("octo_exit_pre", { clear = true }),
-				callback = function(ev)
+				callback = function()
 					local keep = { "octo" }
 					for _, win in ipairs(vim.api.nvim_list_wins()) do
 						local buf = vim.api.nvim_win_get_buf(win)

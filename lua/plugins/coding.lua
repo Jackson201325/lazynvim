@@ -37,6 +37,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true }
 		},
 		-- Not all LSP servers add brackets when completing a function.
 		-- To better deal with this, LazyVim adds a custom option to cmp,
@@ -203,6 +204,11 @@ return {
 		opts = {},
 	},
 
+	{
+		"tpope/vim-repeat",
+		event = "VeryLazy",
+	},
+
 	-- ys actions
 	{
 		"kevinhwang91/nvim-ufo",
@@ -226,12 +232,10 @@ return {
 				},
 			},
 			fold_virt_text_handler = handler,
-			-- provider_selector = function(_bufnr, _filetype, _buftype)
-			-- 	-- if you prefer treesitter provider rather than lsp,
-			-- 	-- return ftMap[filetype] or {'treesitter', 'indent'}
-			-- 	-- return ftMap[filetype]
-			-- 	return { "lsp", "indent" }
-			-- end,
+			provider_selector = function()
+				-- if you prefer treesitter provider rather than lsp,
+				return { "lsp", "indent" }
+			end,
 			enable_get_fold_virt_text = true,
 		},
 		keys = {

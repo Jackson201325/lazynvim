@@ -139,6 +139,10 @@ map(
 	{ desc = "Increase Window Width", noremap = true, silent = true }
 )
 
+map("n", "<C-e>", "<C-e>j", opts)
+map("n", "<C-y>", "<C-y>k", opts)
+
+
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch", noremap = true, silent = true })
 
@@ -197,9 +201,9 @@ end, { desc = "Lazygit (Root Dir)" })
 map("n", "<leader>gG", function()
 	LazyVim.lazygit()
 end, { desc = "Lazygit (cwd)" })
-map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
-map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
-map("n", "<leader>go", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
+map("n", "<leader>gB", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
+-- map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
+map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
 -- map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
 
 -- commenting

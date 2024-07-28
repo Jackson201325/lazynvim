@@ -96,7 +96,7 @@ return {
 			},
 			{
 				"<leader>/",
-        "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({})<CR>",
+				"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({})<CR>",
 				-- LazyVim.pick("live_grep"),
 				desc = "Grep (Root Dir)",
 			},
@@ -141,6 +141,17 @@ return {
 				"<cmd>Telescope git_files<cr>",
 				desc = "Find Files (git-files)",
 			},
+			{
+				"<leader>gb",
+				"<cmd>Telescope git_branches<cr>",
+				desc = "Find branches (git-branches)",
+			},
+			{
+				"<leader>.",
+				"<cmd>Telescope file_browser<cr>",
+				desc = "File Browser",
+			},
+
 			{
 				"<leader>fr",
 				LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }),
@@ -369,7 +380,7 @@ return {
 							["<C-f>"] = actions.preview_scrolling_down,
 							["<C-b>"] = actions.preview_scrolling_up,
 							["<C-k>"] = lga_actions.quote_prompt({
-								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** -w",
+								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/**",
 							}),
 						},
 						n = {
@@ -389,6 +400,21 @@ return {
 				},
 			}
 		end,
+		extensions = {
+			file_browser = {
+				theme = "ivy",
+				-- disables netrw and use telescope-file-browser in its place
+				hijack_netrw = true,
+				mappings = {},
+			},
+			fzf = {
+				fuzzy = true, -- false will only do exact matching
+				override_generic_sorter = true, -- override the generic sorter
+				override_file_sorter = true, -- override the file sorter
+				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+				-- the default case_mode is "smart_case"
+			},
+		},
 	},
 
 	-- Flash Telescope config
@@ -427,9 +453,11 @@ return {
 	{
 		"stevearc/dressing.nvim",
 		lazy = true,
-		enabled = function()
-			return LazyVim.pick.want() == "telescope"
-		end,
+		-- enabled = function()
+		-- 	return LazyVim.pick.want() == "telescope"
+		-- end,
+		event = "VeryLazy",
+		enabled = true,
 		init = function()
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
@@ -459,5 +487,13 @@ return {
         { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
       })
 		end,
+	},
+
+	--lazy
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		lazy = true,
+		event = "VeryLazy",
 	},
 }
