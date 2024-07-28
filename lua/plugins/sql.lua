@@ -8,10 +8,13 @@ if lazyvim_docs then
 	--    }
 	-- or
 	-- Example configuration using a list of dictionaries:
-	--    vim.g.dbs = {
-	--      { name = "dev", url = "Replace with your database connection URL." },
-	--      { name = "staging", url = "Replace with your database connection URL." },
-	--    }
+	vim.g.dbs = {
+		{ name = "agencieshq_4", url = "postgresql://localhost:5432/agencieshq_4" },
+		{ name = "agencieshq_test", url = "postgresql://localhost:5432/agencieshq_test" },
+		{ name = "finsyn_dev", url = "postgresql://localhost:5432/finsync_dev" },
+		{ name = "finsyn_test", url = "postgresql://localhost:5432/finsync_test" },
+		{ name = "wedding", url = "mongodb://127.0.0.1:27017/wedin-app?authSource=admin&retryWrites=false" },
+	}
 
 	-- or
 	-- Create a `.lazy.lua` file in your project and set your connections like this:
@@ -27,6 +30,11 @@ if lazyvim_docs then
 end
 
 local sql_ft = { "sql", "mysql", "plsql" }
+local sql_formatter_config = {
+	keywordCase = "upper",
+	functionCase = "upper",
+	datatypeCase = "upper",
+}
 
 return {
 	recommended = function()
@@ -99,54 +107,62 @@ return {
 	},
 
 	-- Edgy integration
-	-- {
-	--   "folke/edgy.nvim",
-	--   optional = true,
-	--   opts = function(_, opts)
-	--     opts.right = opts.right or {}
-	--     table.insert(opts.right, {
-	--       title = "Database",
-	--       ft = "dbui",
-	--       pinned = true,
-	--       width = 0.3,
-	--       open = function()
-	--         vim.cmd("DBUI")
-	--       end,
-	--     })
-	--
-	--     opts.bottom = opts.bottom or {}
-	--     table.insert(opts.bottom, {
-	--       title = "DB Query Result",
-	--       ft = "dbout",
-	--     })
-	--   end,
-	-- },
+	{
+		"folke/edgy.nvim",
+		event = "BufRead",
+		-- optional = true,
+		opts = function(_, opts)
+			opts.left = opts.left or {}
+			table.insert(opts.left, {
+				title = "Database",
+				ft = "dbui",
+				pinned = true,
+				size = { width = 0.08 },
+				open = function()
+					vim.cmd("DBUI")
+				end,
+			})
+
+			opts.bottom = opts.bottom or {}
+			table.insert(opts.bottom, {
+				title = "DB Query Result",
+				ft = "dbout",
+				size = { height = 0.65 },
+			})
+		end,
+	},
 
 	-- Linters & formatters
 	{
 		"williamboman/mason.nvim",
-		opts = { ensure_installed = { "sqlfluff" } },
+		opts = { ensure_installed = { "sqlfluff", "sql-formatter" } },
 	},
-	{
-		"mfussenegger/nvim-lint",
-		optional = true,
-		opts = function(_, opts)
-			for _, ft in ipairs(sql_ft) do
-				opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
-				table.insert(opts.linters_by_ft[ft], "sqlfluff")
-			end
-		end,
-	},
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	optional = true,
+	-- 	opts = function(_, opts)
+	-- 		for _, ft in ipairs(sql_ft) do
+	-- 			opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
+	-- 			table.insert(opts.linters_by_ft[ft], "sqlfluff")
+	-- 		end
+	-- 	end,
+	-- },
 	{
 		"stevearc/conform.nvim",
-		optional = true,
+		event = "BufRead",
+		-- optional = true,
 		opts = function(_, opts)
-			opts.formatters.sqlfluff = {
-				args = { "format", "--dialect=ansi", "-" },
+			opts.formatters.sql_formatter = {
+				args = {
+					"-l",
+					"postgresql",
+					"--config",
+					vim.fn.json_encode(sql_formatter_config),
+				},
 			}
 			for _, ft in ipairs(sql_ft) do
 				opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-				table.insert(opts.formatters_by_ft[ft], "sqlfluff")
+				table.insert(opts.formatters_by_ft[ft], "sql_formatter")
 			end
 		end,
 	},

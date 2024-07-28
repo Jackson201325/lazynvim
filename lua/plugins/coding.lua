@@ -52,7 +52,6 @@ return {
 			local cmp = require("cmp")
 			local defaults = require("cmp.config.default")()
 			local auto_select = true
-			local types = require("cmp.types")
 
 			return {
 				auto_brackets = {}, -- configure any filetype to auto add brackets
@@ -74,25 +73,6 @@ return {
 							end
 						end,
 					}),
-
-					["<Tab>"] = {
-						i = function()
-							if cmp.visible() then
-								cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Insert })
-							else
-								cmp.complete()
-							end
-						end,
-					},
-					["<S-Tab>"] = {
-						i = function()
-							if cmp.visible() then
-								cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
-							else
-								cmp.complete()
-							end
-						end,
-					},
 					["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
 					["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<C-CR>"] = function(fallback)
@@ -216,11 +196,10 @@ return {
 		opts = {},
 	},
 
-	-- ys actions
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "InsertEnter",
+		event = "VeryLazy",
 		opts = {},
 	},
 
@@ -229,7 +208,7 @@ return {
 		"kevinhwang91/nvim-ufo",
 		dependencies = { "kevinhwang91/promise-async" },
 		lazy = true,
-		event = "VeryLazy",
+		event = "BufEnter",
 		opts = {
 			open_fold_hl_timeout = 150,
 			close_fold_kinds = {},
@@ -247,12 +226,12 @@ return {
 				},
 			},
 			fold_virt_text_handler = handler,
-			provider_selector = function(bufnr, filetype, buftype)
-				-- if you prefer treesitter provider rather than lsp,
-				-- return ftMap[filetype] or {'treesitter', 'indent'}
-				-- return ftMap[filetype]
-				return { "lsp", "indent" }
-			end,
+			-- provider_selector = function(_bufnr, _filetype, _buftype)
+			-- 	-- if you prefer treesitter provider rather than lsp,
+			-- 	-- return ftMap[filetype] or {'treesitter', 'indent'}
+			-- 	-- return ftMap[filetype]
+			-- 	return { "lsp", "indent" }
+			-- end,
 			enable_get_fold_virt_text = true,
 		},
 		keys = {

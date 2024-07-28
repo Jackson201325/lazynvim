@@ -22,6 +22,7 @@ return {
 			{ "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
 			{ "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
 
+      { "<leader>O", "<leader>Octo<cr>", desc = "Search (Octo)" },
 			{ "<leader>a", "", desc = "+assignee (Octo)", ft = "octo" },
 			{ "<leader>c", "", desc = "+comment/code (Octo)", ft = "octo" },
 			{ "<leader>l", "", desc = "+label (Octo)", ft = "octo" },

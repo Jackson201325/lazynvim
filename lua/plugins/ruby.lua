@@ -35,10 +35,6 @@ return {
 				-- },
 				solargraph = {
 					enabled = lsp == "solargraph",
-					-- diagnostics = {
-					-- 	virtual_text = false,
-					-- 	enabled = false,
-					-- },
 				},
 				-- rubocop = {
 				-- 	enabled = formatter == "rubocop",
@@ -64,25 +60,24 @@ return {
 	-- 		end,
 	-- 	},
 	-- },
-	-- {
-	-- 	"stevearc/conform.nvim",
-	-- 	opts = {
-	-- 		formatters_by_ft = {
-	-- 			ruby = { "rubocop" },
-	-- 			eruby = { "erb-format" },
-	-- 		},
-	-- 	},
-	-- },
-	-- {
-	-- 	"mfussenegger/nvim-lint",
-	-- 	-- optional = true,
-	-- 	opts = {
-	-- 		linters_by_ft = {
-	-- 			ruby = { "rubocop" },
-	-- 			eruby = { "erb-format" },
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"stevearc/conform.nvim",
+		optional = true,
+		opts = {
+			formatters_by_ft = {
+				eruby = { "erb_format" },
+			},
+		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		optional = true,
+		opts = {
+			linters_by_ft = {
+				eruby = { "erb_lint" },
+			},
+		},
+	},
 	-- {
 	-- 	"nvim-neotest/neotest",
 	-- 	optional = true,

@@ -90,6 +90,9 @@ return {
 					[">"] = "next_source",
 					["h"] = "close_node",
 					["<space>"] = "none",
+					["{"] = "next_git_modified",
+					["}"] = "prev_git_modified",
+
 					-- ["Y"] = {
 					--   function(state)
 					--     local node = state.tree:get_node()
@@ -192,7 +195,7 @@ return {
 		vscode = true,
 		---@type Flash.Config
 		opts = {
-			-- labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
+			labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
 			modes = {
 				-- options used when flash is activated through
 				-- a regular search with `/` or `?`
@@ -368,7 +371,7 @@ return {
 	-- hunks in a commit.
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "LazyFile",
+		event = "BufRead",
 		opts = {
 			signs = {
 				add = { text = "▎" },
@@ -454,7 +457,7 @@ return {
 			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
 			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 			{
-				"[q",
+				"[[",
 				function()
 					if require("trouble").is_open() then
 						require("trouble").prev({ skip_groups = true, jump = true })
@@ -468,7 +471,7 @@ return {
 				desc = "Previous Trouble/Quickfix Item",
 			},
 			{
-				"]q",
+				"]]",
 				function()
 					if require("trouble").is_open() then
 						require("trouble").next({ skip_groups = true, jump = true })
@@ -489,7 +492,6 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		cmd = { "TodoTrouble", "TodoTelescope" },
-		event = "LazyFile",
 		opts = {},
     -- stylua: ignore
     keys = {
@@ -689,8 +691,14 @@ return {
 	},
 
 	{
+		"cappyzawa/trim.nvim",
+		lazy = true,
+		config = true,
+	},
+
+	{
 		"xiyaowong/transparent.nvim",
-		lazy = false,
+		lazy = true,
 		event = "LazyFile",
 		cmd = "TransparentEnable",
 		opts = {
@@ -752,9 +760,18 @@ return {
 				-- "LspSagaPreviewBorder",
 				-- "LspSagaRenameBorder",
 				-- "NeoTreeNormal",
-				-- "NormalFloat",
-				-- "StatusLine",
-				-- "StatusLineNC",
+				"lualine_c_normalxxx",
+				"lualine_c_normal",
+				"lualine_c_inactive",
+				"lualine_c_12_insert",
+				"lualine_c_12_normal",
+				"lualine_c_12_visual",
+				"lualine_c_12_command",
+				"lualine_c_12_replace",
+				"lualine_c_12_inactive",
+				"NormalFloat",
+				"StatusLine",
+				"StatusLineNC",
 				-- "TelescopeNormal",
 				-- "TelescopePromptBorder",
 				"UfoFoldedBg",
@@ -764,7 +781,7 @@ return {
 				"UfoPreviewThumb",
 				"WhichKey",
 				"WhichKeyFloat",
-				-- "ToolbarLine",
+				"ToolbarLine",
 			}, -- table: additional groups that should be cleared
 			exclude_groups = {}, -- table: groups you don't want to clear
 		},
@@ -772,7 +789,13 @@ return {
 			require("transparent").setup(opts)
 		end,
 	},
-
+	{
+		"mbbill/undotree",
+		config = true,
+		keys = {
+			{ "<leader>U", "<cmd>UndotreeToggle<CR>", desc = "Undo tree" },
+		},
+	},
 	{
 		import = "plugins.extras.editor.telescope",
 		enabled = function()

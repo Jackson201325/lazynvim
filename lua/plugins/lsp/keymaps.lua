@@ -14,15 +14,14 @@ function M.get()
   -- stylua: ignore
   M._keys = {
     { "gd",         vim.lsp.buf.definition,                                                                                                                                                           desc = "Goto Definition",            has = "definition" },
-    -- { "gr",         vim.lsp.buf.references,                                                                                                                                                           desc = "References",                 nowait = true },
-    -- { "gI",         vim.lsp.buf.implementation,                                                                                                                                                       desc = "Goto Implementation" },
+    { "gr",         vim.lsp.buf.references,                                                                                                                                                           desc = "References",                 nowait = true },
+    { "gI",         vim.lsp.buf.implementation,                                                                                                                                                       desc = "Goto Implementation" },
     { "gt",         vim.lsp.buf.type_definition,                                                                                                                                                      desc = "Goto T[y]pe Definition" },
     { "gD",         ":vsplit | lua vim.lsp.buf.definition()<cr>",                                                                                                                                     desc = "Go to Definition in Split",  nowait = true,           remap = false },
     { "K",          vim.lsp.buf.hover,                                                                                                                                                                desc = "Hover" },
     { "gK",         vim.lsp.buf.signature_help,                                                                                                                                                       desc = "Signature Help",             has = "signatureHelp" },
     { "<c-k>",      vim.lsp.buf.signature_help,                                                                                                                                                       mode = "i",                          desc = "Signature Help", has = "signatureHelp" },
     { "ga",         LazyVim.lsp.action.source,                                                                                                                                                        desc = "Source Action",              has = "codeAction" },
-
     { "tR",         "<cmd>TSToolsRenameFile<CR>",                                                                                                                                                     desc = "Rename File", },
     { "tU",         "<cmd>TSToolsRemoveUnusedImports<CR>",                                                                                                                                            desc = "Remove Unused Import", },
     { "ta",         "<cmd>TSToolsAddMissingImports<CR>",                                                                                                                                              desc = "Add Missing Imports", },
@@ -31,7 +30,6 @@ function M.get()
     { "to",         "<cmd>TSToolsOrganizeImports<CR>",                                                                                                                                                desc = "Organize Imports", },
     { "tr",         "<cmd>TSToolsFileReferences<CR>",                                                                                                                                                 desc = "Find references", },
     { "tu",         "<cmd>TSToolsRemoveUnused<CR>",                                                                                                                                                   desc = "Remove Unused Statement", },
-
     { "<leader>o",  "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 70, previewer = false, initial_mode = normal, layout_config = { width = 0.3, height = 0.2 } })<CR>", desc = "LSP Outline",                mode = { "n" } },
     { "<leader>d",  "<cmd>Telescope diagnostics bufnr=0<cr>",                                                                                                                                         desc = "Buffer Diagnostics" },
     { "<leader>lC", vim.lsp.codelens.refresh,                                                                                                                                                         desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },

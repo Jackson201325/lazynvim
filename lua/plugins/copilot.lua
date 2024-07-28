@@ -1,5 +1,4 @@
 return {
-	recommended = true,
 	-- copilot
 	{
 		"zbirenbaum/copilot.lua",
@@ -19,13 +18,13 @@ return {
 		optional = true,
 		event = "VeryLazy",
 		opts = function(_, opts)
-			local colors = {
-				[""] = LazyVim.ui.fg("Special"),
-				["Normal"] = LazyVim.ui.fg("Special"),
-				["Warning"] = LazyVim.ui.fg("DiagnosticError"),
-				["InProgress"] = LazyVim.ui.fg("DiagnosticWarn"),
-			}
-			print("opts", opts)
+			-- local colors = {
+			-- 	[""] = LazyVim.ui.fg("Special"),
+			-- 	["Normal"] = LazyVim.ui.fg("Special"),
+			-- 	["Warning"] = LazyVim.ui.fg("DiagnosticError"),
+			-- 	["InProgress"] = LazyVim.ui.fg("DiagnosticWarn"),
+			-- }
+			-- print("opts", opts)
 			-- table.insert(opts.sections.lualine_x, 2, {
 			--   function()
 			--     local icon = LazyVim.config.icons.kinds.Copilot
