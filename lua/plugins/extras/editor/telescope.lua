@@ -90,6 +90,11 @@ return {
 		},
 		keys = {
 			{
+				"<leader>.",
+				":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+				desc = "Switch Buffer",
+			},
+			{
 				"<leader>,",
 				"<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
 				desc = "Switch Buffer",
@@ -147,7 +152,7 @@ return {
 				desc = "Find branches (git-branches)",
 			},
 			{
-				"<leader>.",
+				"<leader>fB",
 				"<cmd>Telescope file_browser<cr>",
 				desc = "File Browser",
 			},

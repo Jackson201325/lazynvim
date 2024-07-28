@@ -271,7 +271,7 @@ return {
 				"shfmt",
 				"dockerfile-language-server",
 				"elixir-ls",
-        "coffeesense-language-server",
+				"coffeesense-language-server",
 				"prisma-language-server",
 				"pyright",
 				"solargraph",
