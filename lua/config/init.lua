@@ -268,7 +268,6 @@ end
 
 M.did_init = false
 function M.init()
-	print("LazyVim.init")
 	if M.did_init then
 		return
 	end
