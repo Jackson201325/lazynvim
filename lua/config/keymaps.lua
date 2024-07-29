@@ -10,7 +10,7 @@ map("n", "=", "<C-a>", opts)
 map("n", "<C-o>", "<C-o>zz", opts)
 map("n", "<C-i>", "<C-i>zz", opts)
 
--- Do not yank 
+-- Do not yank
 map("n", "x", '"_x', opts)
 map({ "n", "v" }, "c", '"_c', opts)
 map({ "n", "v" }, "S", '"_S', opts)
@@ -18,8 +18,7 @@ map({ "n", "v" }, "S", '"_S', opts)
 -- Do not yank with dd
 -- map("n", "dd", '"_dd', opts)
 map("n", "vw", "viw", opts)
--- map("n", "vp", 'viw"_dP', opts)
-map("n", "vp", "viwp", opts)
+map("n", "vp", 'viw"_dP', opts)
 map("n", "dw", "diw", opts)
 map("n", "dW", "diW", opts)
 map("n", "yw", "yiw", opts)
@@ -124,8 +123,8 @@ map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map("n", "<leader><Down>", "<cmd>resize +2<cr>", { desc = "Increase Window Height", noremap = true, silent = true })
-map("n", "<leader><Up>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height", noremap = true, silent = true })
+map("n", "<leader><up>", "<cmd>resize +5<cr>", { desc = "Increase Window Height", noremap = true, silent = true })
+map("n", "<leader><down>", "<cmd>resize -5<cr>", { desc = "Decrease Window Height", noremap = true, silent = true })
 map(
 	"n",
 	"<leader><Left>",
@@ -141,7 +140,6 @@ map(
 
 map("n", "<C-e>", "<C-e>j", opts)
 map("n", "<C-y>", "<C-y>k", opts)
-
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch", noremap = true, silent = true })

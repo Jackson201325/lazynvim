@@ -385,7 +385,7 @@ return {
 							["<C-f>"] = actions.preview_scrolling_down,
 							["<C-b>"] = actions.preview_scrolling_up,
 							["<C-k>"] = lga_actions.quote_prompt({
-								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/**",
+								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml",
 							}),
 						},
 						n = {
@@ -443,8 +443,8 @@ return {
 						},
 					},
 					action = function(match)
-						local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-						picker:set_selection(match.pos[1] - 1)
+						local picker_action = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+						picker_action:set_selection(match.pos[1] - 1)
 					end,
 				})
 			end
