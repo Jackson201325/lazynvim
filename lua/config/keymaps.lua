@@ -270,7 +270,80 @@ map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
---
---
+
+-- For default preset
+map("n", "<leader>m", require("treesj").toggle)
+-- For extending default preset with `recursive = true`
+map("n", "<leader>M", function()
+	require("treesj").toggle({ split = { recursive = true } })
+end)
+
 LazyVim.toggle.map("<c-w>m", LazyVim.toggle.maximize)
---
+
+vim.api.nvim_create_user_command("Telescopeprfiles", function()
+	local project_base_branches = {
+		readygop = "origin/main",
+		["readygop-ui"] = "origin/main",
+		has_data_imports = "origin/master",
+		["wedin-clone"] = "origin/main",
+	}
+
+	-- get the name of the current git repository from the remote url
+	local remote_url = vim.fn.systemlist("git config --get remote.origin.url")[1]
+	local project_name = remote_url:match("^.+/(.+).git$") -- extract project name from url
+
+	local fynsinc = remote_url:find("finsync")
+	local ins = remote_url:find("instructure")
+	local wedding = remote_url:find("wed")
+
+	-- List of potential base branches to check
+	local potential_base_branches = {
+		"upstream/master",
+		"origin/develop",
+		"origin/master",
+		"origin/main",
+	}
+
+	-- Function to check if a branch exists in the remote repository
+	local function branch_exists(branch)
+		local result = vim.fn.systemlist("git ls-remote --heads " .. branch)
+		return #result > 0
+	end
+
+	-- Determine the base branch based on the project name or organization
+	local base_branch
+	if fynsinc then
+		base_branch = "origin/develop"
+	elseif ins then
+		base_branch = "origin/master"
+	elseif wedding then
+		base_branch = "origin/main"
+	else
+		for _, branch in ipairs(potential_base_branches) do
+			if branch_exists(branch) then
+				base_branch = branch
+				break
+			end
+		end
+
+		-- Fall back to the predefined base branches map or default to 'origin/master'
+		if not base_branch then
+			base_branch = project_base_branches[project_name] or "origin/master"
+		end
+	end
+
+	local pr_branch = vim.fn.systemlist("git branch --show-current")[1] -- get current branch name
+
+	require("telescope.builtin").git_files({
+		prompt_title = "PR files: " .. base_branch,
+		cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1],
+		git_command = { "git", "diff", "--name-only", base_branch .. "..." .. pr_branch },
+		previewer = require("telescope.previewers").new_termopen_previewer({
+			get_command = function(entry)
+				return { "git", "diff", base_branch .. "..." .. pr_branch, "--", entry.value }
+			end,
+		}),
+	})
+end, {})
+
+map("n", "<c-p>", ":Telescopeprfiles<cr>", { noremap = true, silent = false })

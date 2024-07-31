@@ -804,4 +804,13 @@ return {
 			return LazyVim.pick.want() == "telescope"
 		end,
 	},
+
+	{
+		"Wansmer/treesj",
+    lazy = true,
+		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
+		config = function()
+			require("treesj").setup({})
+		end,
+	},
 }

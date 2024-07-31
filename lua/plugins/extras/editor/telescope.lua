@@ -389,6 +389,8 @@ return {
 							}),
 						},
 						n = {
+							["<c-i>"] = find_files_no_ignore,
+							["<c-h>"] = find_files_with_hidden,
 							["q"] = actions.close,
 							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,

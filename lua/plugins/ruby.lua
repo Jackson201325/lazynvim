@@ -11,7 +11,7 @@ if vim.fn.has("nvim-0.10") == 0 then
 	-- ruby_lsp does not work well with Neovim < 0.10
 	lsp = vim.g.lazyvim_ruby_lsp or "solargraph"
 end
--- local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
+local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
 
 return {
 	recommended = function()
@@ -34,10 +34,16 @@ return {
 				-- 	enabled = lsp == "ruby_lsp",
 				-- },
 				solargraph = {
-					enabled = lsp == "solargraph",
+					enabled = true,
+					settings = {
+						solargraph = {
+							diagnostics = false,
+							formatting = false,
+						},
+					},
 				},
 				-- rubocop = {
-				-- 	enabled = formatter == "rubocop",
+				-- 	enabled = true,
 				-- },
 				-- standardrb = {
 				-- 	enabled = formatter == "standardrb",
@@ -65,6 +71,7 @@ return {
 		optional = true,
 		opts = {
 			formatters_by_ft = {
+				ruby = { "rubocop" },
 				eruby = { "erb_format" },
 			},
 		},
@@ -74,6 +81,7 @@ return {
 		optional = true,
 		opts = {
 			linters_by_ft = {
+				ruby = { "rubocop" },
 				eruby = { "erb_lint" },
 			},
 		},
@@ -100,3 +108,45 @@ return {
 	-- 	},
 	-- },
 }
+
+-- servers = {
+--   gopls = {
+--     settings = {
+--       gopls = {
+--         gofumpt = true,
+--         codelenses = {
+--           gc_details = false,
+--           generate = true,
+--           regenerate_cgo = true,
+--           run_govulncheck = true,
+--           test = true,
+--           tidy = true,
+--           upgrade_dependency = true,
+--           vendor = true,
+--         },
+--         hints = {
+--           assignVariableTypes = true,
+--           compositeLiteralFields = true,
+--           compositeLiteralTypes = true,
+--           constantValues = true,
+--           functionTypeParameters = true,
+--           parameterNames = true,
+--           rangeVariableTypes = true,
+--         },
+--         analyses = {
+--           fieldalignment = true,
+--           nilness = true,
+--           unusedparams = true,
+--           unusedwrite = true,
+--           useany = true,
+--         },
+--         usePlaceholders = true,
+--         completeUnimported = true,
+--         staticcheck = true,
+--         directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+--         semanticTokens = true,
+--       },
+--     },
+--   },
+-- },
+--
