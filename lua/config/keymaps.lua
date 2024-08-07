@@ -19,6 +19,7 @@ map({ "n", "v" }, "S", '"_S', opts)
 -- map("n", "dd", '"_dd', opts)
 map("n", "vw", "viw", opts)
 map("n", "vp", 'viw"_dP', opts)
+-- map("n", "vp", 'viwp', opts)
 map("n", "dw", "diw", opts)
 map("n", "dW", "diW", opts)
 map("n", "yw", "yiw", opts)
@@ -27,12 +28,12 @@ map("n", "cw", "ciw", opts)
 map("n", "cW", "ciW", opts)
 
 --To set in the cursor in the middle when jumping
-map({ "n", "v" }, ")", "{", opts)
-map({ "n", "v" }, "(", "}", opts)
+-- map({ "n", "v" }, ")", "{", opts)
+-- map({ "n", "v" }, "(", "}", opts)
 
 --To set in the cursor in the middle when jumping
-map({ "n", "v" }, "}", "{", opts)
-map({ "n", "v" }, "{", "}", opts)
+-- map({ "n", "v" }, "}", "{", opts)
+-- map({ "n", "v" }, "{", "}", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
@@ -49,7 +50,9 @@ map("i", "jj", "<cmd>noh<cr><ESC>", opts)
 map("i", "kk", "<cmd>noh<cr><ESC>", opts)
 map("i", "kj", "<cmd>noh<cr><ESC>", opts)
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
-map("n", "0", "^", opts)
+
+map({ "v", "n" }, "0", "^", opts)
+map({ "v", "n" }, "-", "$", opts)
 
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
@@ -272,10 +275,17 @@ map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- For default preset
-map("n", "<leader>m", require("treesj").toggle)
+-- map("n", "<leader>m", require("treesj").toggle)
 -- For extending default preset with `recursive = true`
-map("n", "<leader>M", function()
-	require("treesj").toggle({ split = { recursive = true } })
+map("n", "&", function()
+	require("treesj").toggle({ split = { recursive = false } })
+end)
+
+map("n", "(", function()
+	require("harpoon"):list():prev()
+end)
+map("n", ")", function()
+	require("harpoon"):list():next()
 end)
 
 LazyVim.toggle.map("<c-w>m", LazyVim.toggle.maximize)
@@ -293,6 +303,7 @@ vim.api.nvim_create_user_command("Telescopeprfiles", function()
 	local project_name = remote_url:match("^.+/(.+).git$") -- extract project name from url
 
 	local fynsinc = remote_url:find("finsync")
+	local monorail = remote_url:find("monorail")
 	local ins = remote_url:find("instructure")
 	local wedding = remote_url:find("wed")
 
@@ -312,7 +323,7 @@ vim.api.nvim_create_user_command("Telescopeprfiles", function()
 
 	-- Determine the base branch based on the project name or organization
 	local base_branch
-	if fynsinc then
+	if fynsinc or monorail then
 		base_branch = "origin/develop"
 	elseif ins then
 		base_branch = "origin/master"

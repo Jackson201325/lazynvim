@@ -5,7 +5,7 @@ if lazyvim_docs then
 	vim.g.lazyvim_ruby_formatter = "rubocop"
 end
 
-local lsp = vim.g.lazyvim_ruby_lsp or "solargraph"
+local lsp = vim.g.lazyvim_ruby_lsp or "ruby_lsp"
 
 if vim.fn.has("nvim-0.10") == 0 then
 	-- ruby_lsp does not work well with Neovim < 0.10
@@ -31,14 +31,15 @@ return {
 			---@type lspconfig.options
 			servers = {
 				-- ruby_lsp = {
-				-- 	enabled = lsp == "ruby_lsp",
+				-- 	enabled = true,
 				-- },
 				solargraph = {
 					enabled = true,
 					settings = {
 						solargraph = {
-							diagnostics = false,
+							diagnostics = true,
 							formatting = false,
+							signature_help = false,
 						},
 					},
 				},
@@ -81,7 +82,7 @@ return {
 		optional = true,
 		opts = {
 			linters_by_ft = {
-				ruby = { "rubocop" },
+				-- ruby = { "rubocop" },
 				eruby = { "erb_lint" },
 			},
 		},
@@ -108,45 +109,3 @@ return {
 	-- 	},
 	-- },
 }
-
--- servers = {
---   gopls = {
---     settings = {
---       gopls = {
---         gofumpt = true,
---         codelenses = {
---           gc_details = false,
---           generate = true,
---           regenerate_cgo = true,
---           run_govulncheck = true,
---           test = true,
---           tidy = true,
---           upgrade_dependency = true,
---           vendor = true,
---         },
---         hints = {
---           assignVariableTypes = true,
---           compositeLiteralFields = true,
---           compositeLiteralTypes = true,
---           constantValues = true,
---           functionTypeParameters = true,
---           parameterNames = true,
---           rangeVariableTypes = true,
---         },
---         analyses = {
---           fieldalignment = true,
---           nilness = true,
---           unusedparams = true,
---           unusedwrite = true,
---           useany = true,
---         },
---         usePlaceholders = true,
---         completeUnimported = true,
---         staticcheck = true,
---         directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
---         semanticTokens = true,
---       },
---     },
---   },
--- },
---

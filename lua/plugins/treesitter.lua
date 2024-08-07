@@ -83,6 +83,7 @@ return {
 					node_decremental = "<bs>",
 				},
 			},
+			endwise = { enable = true },
 			textobjects = {
 				move = {
 					enable = true,
@@ -152,7 +153,15 @@ return {
 	{
 		"windwp/nvim-ts-autotag",
 		event = "LazyFile",
+		lazy = true,
 		opts = {},
+	},
+
+	-- Automatically add closing tags for HTML and JSX
+	{
+		"RRethy/nvim-treesitter-endwise",
+		event = "LazyFile",
+		lazy = true,
 	},
 
 	{

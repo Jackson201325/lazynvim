@@ -275,6 +275,7 @@ return {
 				"prisma-language-server",
 				"pyright",
 				"solargraph",
+				-- "ruby-lsp",
 				"sqlls",
 				"tailwindcss-language-server",
 				"vue-language-server",

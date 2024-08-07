@@ -90,8 +90,8 @@ return {
 					[">"] = "next_source",
 					["h"] = "close_node",
 					["<space>"] = "none",
-					["{"] = "next_git_modified",
-					["}"] = "prev_git_modified",
+					-- ["{"] = "next_git_modified",
+					-- ["}"] = "prev_git_modified",
 
 					-- ["Y"] = {
 					--   function(state)
@@ -195,7 +195,7 @@ return {
 		vscode = true,
 		---@type Flash.Config
 		opts = {
-			labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
+			-- labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
 			modes = {
 				-- options used when flash is activated through
 				-- a regular search with `/` or `?`
@@ -262,27 +262,27 @@ return {
 				},
 				-- options used for treesitter selections
 				-- `require("flash").treesitter()`
-				treesitter = {
-					labels = "abcdefghijklmnopqrstuvwxyz",
-					jump = { pos = "range" },
-					search = { incremental = false },
-					label = { before = true, after = true, style = "inline" },
-					highlight = {
-						backdrop = false,
-						matches = false,
-					},
-				},
-
-				treesitter_search = {
-					jump = { pos = "range" },
-					search = { multi_window = true, wrap = true, incremental = false },
-					remote_op = { restore = true },
-					label = { before = true, after = true, style = "inline" },
-				},
+				-- treesitter = {
+				-- 	-- labels = "abcdefghijklmnopqrstuvwxyz",
+				-- 	jump = { pos = "range" },
+				-- 	search = { incremental = false },
+				-- 	label = { before = true, after = true, style = "inline" },
+				-- 	highlight = {
+				-- 		backdrop = false,
+				-- 		matches = false,
+				-- 	},
+				-- },
+				--
+				-- treesitter_search = {
+				-- 	jump = { pos = "range" },
+				-- 	search = { multi_window = true, wrap = true, incremental = false },
+				-- 	remote_op = { restore = true },
+				-- 	label = { before = true, after = true, style = "inline" },
+				-- },
 				-- options used for remote flash
-				remote = {
-					remote_op = { restore = true, motion = true },
-				},
+				-- remote = {
+				-- 	remote_op = { restore = true, motion = true },
+				-- },
 			},
 		},
     -- stylua: ignore
@@ -703,38 +703,6 @@ return {
 		cmd = "TransparentEnable",
 		opts = {
 			groups = { -- table: default groups
-				-- "BqfPreviewBorder",
-				-- "BqfPreviewThumb",
-				-- "BqfPreviewTitle",
-				-- "Comment",
-				-- "Conditional",
-				-- "Constant",
-				-- "EndOfBuffer",
-				-- "Float",
-				-- "FloatBorder",
-				-- "FloatBorderNC",
-				-- "Function",
-				-- "Identifier",
-				-- "LspSagaBorderTitle",
-				-- "LspSagaCodeActionBorder",
-				-- "LspSagaCodeActionTitle",
-				-- "LspSagaFinderSelection",
-				-- "LspSagaHoverBorder",
-				-- "LspSagaRenameBorder",
-				-- "NonText",
-				-- "Normal",
-				-- "NormalFloat",
-				-- "NormalNC",
-				-- "Operator",
-				-- "PreProc",
-				-- "Repeat",
-				-- "SignColumn",
-				-- "Special",
-				-- "Statement",
-				-- "String",
-				-- "Structure",
-				-- "Todo",
-				-- "Type",
 				"UfoFoldedBg",
 				"UfoFoldedFg",
 				"UfoPreviewCursorLine",
@@ -742,24 +710,7 @@ return {
 				"UfoPreviewThumb",
 			},
 			extra_groups = {
-				-- "BqfPreviewBorder",
-				-- "BqfPreviewThumb",
-				-- "BqfPreviewTitle",
-				-- "CursorColumn",
-				-- "Float",
-				-- "FloatBorder",
-				-- "FloatBorderNC",
 				"Folded",
-				-- "LspSagaBorderTitle",
-				-- "LspSagaCodeActionBorder",
-				-- "LspSagaCodeActionTitle",
-				-- "LspSagaFinderSelection",
-				-- "LspSagaFinderSelection",
-				-- "LspSagaHoverBorder",
-				-- "LspSagaHoverBorder",
-				-- "LspSagaPreviewBorder",
-				-- "LspSagaRenameBorder",
-				-- "NeoTreeNormal",
 				"lualine_c_normalxxx",
 				"lualine_c_normal",
 				"lualine_c_inactive",
@@ -772,8 +723,6 @@ return {
 				"NormalFloat",
 				"StatusLine",
 				"StatusLineNC",
-				-- "TelescopeNormal",
-				-- "TelescopePromptBorder",
 				"UfoFoldedBg",
 				"UfoFoldedFg",
 				"UfoPreviewCursorLine",
@@ -807,10 +756,40 @@ return {
 
 	{
 		"Wansmer/treesj",
-    lazy = true,
+		lazy = true,
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		config = function()
-			require("treesj").setup({})
+			require("treesj").setup({
+				max_join_length = 1500,
+				langs = {
+					ruby = {
+						constants = {
+							both = {
+								no_format_with = {},
+								fallback = function(_)
+									vim.cmd("SplitjoinSplit")
+								end,
+							},
+						},
+						module = {
+							both = {
+								no_format_with = {}, -- Need to avoid 'no format with comment'
+								fallback = function(_)
+									vim.cmd("SplitjoinJoin")
+								end,
+							},
+						},
+						class = {
+							both = {
+								no_format_with = {},
+								fallback = function(_)
+									vim.cmd("SplitjoinSplit")
+								end,
+							},
+						},
+					},
+				},
+			})
 		end,
 	},
 }
