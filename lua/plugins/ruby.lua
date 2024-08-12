@@ -11,7 +11,7 @@ if vim.fn.has("nvim-0.10") == 0 then
 	-- ruby_lsp does not work well with Neovim < 0.10
 	lsp = vim.g.lazyvim_ruby_lsp or "solargraph"
 end
-local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
+-- local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
 
 return {
 	recommended = function()

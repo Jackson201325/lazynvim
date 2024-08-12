@@ -90,11 +90,6 @@ return {
 		},
 		keys = {
 			{
-				"<leader>.",
-				":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-				desc = "Switch Buffer",
-			},
-			{
 				"<leader>,",
 				"<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
 				desc = "Switch Buffer",
@@ -372,13 +367,25 @@ return {
 					mappings = {
 						i = {
 							["<c-t>"] = open_with_trouble,
-							["<a-t>"] = open_with_trouble,
 							["<c-i>"] = find_files_no_ignore,
 							["<c-h>"] = find_files_with_hidden,
 							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+
 							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 							["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
+
+							["<CR>"] = function(pb)
+								local action_state = require("telescope.actions.state")
+								local current_picker = action_state.get_current_picker(pb)
+								local multi = current_picker:get_multi_selection()
+								actions.select_default(pb) -- the normal enter behaviour
+								for _, j in pairs(multi) do
+									if j.path ~= nil then -- is it a file -> open it as well:
+										vim.cmd(string.format("%s %s", "edit", j.path))
+									end
+								end
+							end,
 
 							["<C-Down>"] = actions.cycle_history_next,
 							["<C-Up>"] = actions.cycle_history_prev,
@@ -389,6 +396,18 @@ return {
 							}),
 						},
 						n = {
+							["<CR>"] = function(pb)
+								local action_state = require("telescope.actions.state")
+								local current_picker = action_state.get_current_picker(pb)
+								local multi = current_picker:get_multi_selection()
+								actions.select_default(pb) -- the normal enter behaviour
+								for _, j in pairs(multi) do
+									if j.path ~= nil then -- is it a file -> open it as well:
+										vim.cmd(string.format("%s %s", "edit", j.path))
+									end
+								end
+							end,
+
 							["<c-i>"] = find_files_no_ignore,
 							["<c-h>"] = find_files_with_hidden,
 							["q"] = actions.close,
@@ -408,16 +427,10 @@ return {
 			}
 		end,
 		extensions = {
-			file_browser = {
-				theme = "ivy",
-				-- disables netrw and use telescope-file-browser in its place
-				hijack_netrw = true,
-				mappings = {},
-			},
 			fzf = {
 				fuzzy = true, -- false will only do exact matching
-				override_generic_sorter = true, -- override the generic sorter
-				override_file_sorter = true, -- override the file sorter
+				-- override_generic_sorter = true, -- override the generic sorter
+				-- override_file_sorter = true, -- override the file sorter
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 				-- the default case_mode is "smart_case"
 			},
@@ -494,13 +507,5 @@ return {
         { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
       })
 		end,
-	},
-
-	--lazy
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-		lazy = true,
-		event = "VeryLazy",
 	},
 }

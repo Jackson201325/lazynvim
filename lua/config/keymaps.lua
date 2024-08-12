@@ -32,8 +32,8 @@ map("n", "cW", "ciW", opts)
 -- map({ "n", "v" }, "(", "}", opts)
 
 --To set in the cursor in the middle when jumping
--- map({ "n", "v" }, "}", "{", opts)
--- map({ "n", "v" }, "{", "}", opts)
+map({ "n", "v" }, "}", "{", opts)
+map({ "n", "v" }, "{", "}", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
@@ -346,6 +346,7 @@ vim.api.nvim_create_user_command("Telescopeprfiles", function()
 	local pr_branch = vim.fn.systemlist("git branch --show-current")[1] -- get current branch name
 
 	require("telescope.builtin").git_files({
+    initial_mode = "normal",
 		prompt_title = "PR files: " .. base_branch,
 		cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1],
 		git_command = { "git", "diff", "--name-only", base_branch .. "..." .. pr_branch },
