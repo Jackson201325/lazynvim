@@ -366,15 +366,6 @@ return {
 					end,
 					mappings = {
 						i = {
-							["<c-t>"] = open_with_trouble,
-							["<c-i>"] = find_files_no_ignore,
-							["<c-h>"] = find_files_with_hidden,
-							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-
-							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-							["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
-
 							["<CR>"] = function(pb)
 								local action_state = require("telescope.actions.state")
 								local current_picker = action_state.get_current_picker(pb)
@@ -386,11 +377,6 @@ return {
 									end
 								end
 							end,
-
-							["<C-Down>"] = actions.cycle_history_next,
-							["<C-Up>"] = actions.cycle_history_prev,
-							["<C-f>"] = actions.preview_scrolling_down,
-							["<C-b>"] = actions.preview_scrolling_up,
 							["<C-k>"] = lga_actions.quote_prompt({
 								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml",
 							}),
@@ -408,13 +394,7 @@ return {
 								end
 							end,
 
-							["<c-i>"] = find_files_no_ignore,
-							["<c-h>"] = find_files_with_hidden,
 							["q"] = actions.close,
-							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-							["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
 						},
 					},
 				},
