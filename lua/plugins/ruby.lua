@@ -43,9 +43,9 @@ return {
 						},
 					},
 				},
-				-- rubocop = {
-				-- 	enabled = true,
-				-- },
+				rubocop = {
+					enabled = false,
+				},
 				-- standardrb = {
 				-- 	enabled = formatter == "standardrb",
 				-- },
@@ -77,16 +77,16 @@ return {
 			},
 		},
 	},
-	{
-		"mfussenegger/nvim-lint",
-		optional = true,
-		opts = {
-			linters_by_ft = {
-				-- ruby = { "rubocop" },
-				eruby = { "erb_lint" },
-			},
-		},
-	},
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	optional = true,
+	-- 	opts = {
+	-- 		linters_by_ft = {
+	-- 			-- ruby = { "rubocop" },
+	-- 			eruby = { "erb_lint" },
+	-- 		},
+	-- 	},
+	-- },
 	-- {
 	-- 	"nvim-neotest/neotest",
 	-- 	optional = true,

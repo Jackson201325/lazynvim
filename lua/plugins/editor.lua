@@ -683,7 +683,7 @@ return {
 			map("n", "<leader>rf", "<cmd>lua RAILS_FOREMAN_TOGGLE()<cr>", opts)
 			map("n", "<leader>rn", "<cmd>lua NPM_SERVER_TOGGLE()<cr>", opts)
 			map("n", "<leader>rrb", "<cmd>lua BYEBUG_SERVER_TOGGLE()<cr>", opts)
-			map("n", "<leader>rrc", "<cmd>lua RAILS_CONSOLE_TOGGLE()<cr>", opts)
+			map("n", "<leader>rc", "<cmd>lua RAILS_CONSOLE_TOGGLE()<cr>", opts)
 			map("n", "<leader>rrr", "<cmd>lua RAILS_ROUTES_TOGGLE()<cr>", opts)
 			map("n", "<leader>rs", "<cmd>lua RAILS_SERVER_TOGGLE()<cr>", opts)
 			map("n", "<leader>ry", "<cmd>lua YARN_SERVER_TOGGLE()<cr>", opts)

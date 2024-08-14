@@ -358,4 +358,4 @@ vim.api.nvim_create_user_command("Telescopeprfiles", function()
 	})
 end, {})
 
-map("n", "<c-p>", ":Telescopeprfiles<cr>", { noremap = true, silent = false })
+map("n", "<c-g>", ":Telescopeprfiles<cr>", { noremap = true, silent = false })
