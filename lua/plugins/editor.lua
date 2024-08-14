@@ -441,7 +441,10 @@ return {
 		opts = {
 			modes = {
 				lsp = {
-					win = { position = "right" },
+					win = {
+            position = "right",
+            width = 40,
+          },
 				},
 			},
 		},

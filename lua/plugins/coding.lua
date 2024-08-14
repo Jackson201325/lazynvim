@@ -37,7 +37,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true }
+			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
 		},
 		-- Not all LSP servers add brackets when completing a function.
 		-- To better deal with this, LazyVim adds a custom option to cmp,

@@ -76,7 +76,7 @@ map("n", "<leader>=", "<C-w>=", { desc = "Split Equal" })
 map("n", "<leader>\\", "<C-w>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
-map("n", "<leader>C", '<cmd>%bdelete|edit #|normal `"<CR>', { desc = "Delete Other Buffers" })
+map("n", "<leader>C", '<Cmd>BufferLineCloseOthers<CR>', { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map(
 	"n",
@@ -163,7 +163,7 @@ map("i", ";", ";<c-g>u", opts)
 map(
 	{ "n", "x" },
 	"fw",
-	"<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>",
+	"<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml --iglob !**/**stories** -F'})<CR>",
 	{ desc = "Find Word in project under cursor", noremap = true, silent = true }
 )
 
@@ -346,7 +346,7 @@ vim.api.nvim_create_user_command("Telescopeprfiles", function()
 	local pr_branch = vim.fn.systemlist("git branch --show-current")[1] -- get current branch name
 
 	require("telescope.builtin").git_files({
-    initial_mode = "normal",
+		initial_mode = "normal",
 		prompt_title = "PR files: " .. base_branch,
 		cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1],
 		git_command = { "git", "diff", "--name-only", base_branch .. "..." .. pr_branch },
