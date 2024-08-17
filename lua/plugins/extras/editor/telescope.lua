@@ -387,6 +387,9 @@ return {
 									end
 								end
 							end,
+							["<c-n>"] = actions.move_selection_next,
+							["<c-p>"] = actions.move_selection_previous,
+
 							["<C-Down>"] = actions.cycle_history_next,
 							["<C-Up>"] = actions.cycle_history_prev,
 							["<C-f>"] = actions.preview_scrolling_down,
@@ -408,6 +411,8 @@ return {
 								end
 							end,
 
+							["<c-n>"] = actions.move_selection_next,
+							["<c-p>"] = actions.move_selection_previous,
 							-- ["<c-i>"] = find_files_no_ignore,
 							["<c-h>"] = find_files_with_hidden,
 							["q"] = actions.close,

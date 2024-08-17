@@ -195,7 +195,7 @@ return {
 		vscode = true,
 		---@type Flash.Config
 		opts = {
-			-- labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
+			labels = "ASDFGHJKLQWERTYUIOPZXCVBNM",
 			modes = {
 				-- options used when flash is activated through
 				-- a regular search with `/` or `?`
