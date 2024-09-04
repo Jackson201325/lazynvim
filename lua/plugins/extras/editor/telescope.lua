@@ -395,7 +395,7 @@ return {
 							["<C-f>"] = actions.preview_scrolling_down,
 							["<C-b>"] = actions.preview_scrolling_up,
 							["<C-k>"] = lga_actions.quote_prompt({
-								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml --iglob !**/**stories** -F",
+								postfix = " --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml --iglob !**/**stories** -F --iglob !**/**.txt",
 							}),
 						},
 						n = {

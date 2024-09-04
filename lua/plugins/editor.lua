@@ -442,9 +442,9 @@ return {
 			modes = {
 				lsp = {
 					win = {
-            position = "right",
-            width = 40,
-          },
+						position = "right",
+						width = 40,
+					},
 				},
 			},
 		},
@@ -624,7 +624,7 @@ return {
 			end
 
 			local docker_up = terminal:new({
-				cmd = "docker-compose up",
+				cmd = "docker compose up -d && docker compose logs -f web postgres web-dev-logs",
 				close_on_exit = false,
 				direction = "float",
 				hidden = true,
@@ -636,7 +636,7 @@ return {
 			end
 
 			local docker_bash = terminal:new({
-				cmd = "docker-compose run --rm web bash",
+				cmd = "docker compose run --rm web bash",
 				close_on_exit = false,
 				direction = "float",
 				hidden = true,
