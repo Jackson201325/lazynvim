@@ -2,10 +2,6 @@ local opts = { noremap = true, silent = true }
 
 local map = LazyVim.safe_keymap_set
 
--- Minus Plus
--- map("n", "-", "<C-x>", opts)
--- map("n", "=", "<C-a>", opts)
-
 -- Jump back
 map("n", "<C-o>", "<C-o>zz", opts)
 map("n", "<C-i>", "<C-i>zz", opts)
@@ -42,9 +38,6 @@ map("n", "<C-d>", "<C-d>zz", opts)
 -- Paste over
 map("x", "p", '"_dP', opts)
 
--- Select all
-map("n", "<C-a>", "gg<S-v>G", opts)
-
 -- Faster esc
 map("i", "jj", "<cmd>noh<cr><ESC>", opts)
 map("i", "kk", "<cmd>noh<cr><ESC>", opts)
@@ -76,7 +69,7 @@ map("n", "<leader>=", "<C-w>=", { desc = "Split Equal" })
 map("n", "<leader>\\", "<C-w>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
-map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
+map("n", "<leader>C", "<cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map(
 	"n",
@@ -163,7 +156,7 @@ map("i", ";", ";<c-g>u", opts)
 map(
 	{ "n", "x" },
 	"fw",
-	"<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml --iglob !**/**stories** -F'})<CR>",
+	"<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' --iglob !**/*_spec.rb --iglob !spec/** --iglob !**/**test**/** --iglob !**/**.yml --iglob !**/**stories** -F --iglob !**/**.txt'})<CR>",
 	{ desc = "Find Word in project under cursor", noremap = true, silent = true }
 )
 
@@ -236,10 +229,10 @@ end
 -- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "gl", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "gL", diagnostic_goto(false), { desc = "Prev Diagnostic" })
--- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
--- map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
--- map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
--- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- -- stylua: ignore start
 map("n", "<leader>gf", function()
@@ -273,6 +266,7 @@ map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+map("t", "<c-t>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- For default preset
 -- map("n", "<leader>m", require("treesj").toggle)
@@ -284,6 +278,7 @@ end)
 map("n", "(", function()
 	require("harpoon"):list():prev()
 end)
+
 map("n", ")", function()
 	require("harpoon"):list():next()
 end)
