@@ -3,8 +3,8 @@ local opts = { noremap = true, silent = true }
 local map = LazyVim.safe_keymap_set
 
 -- Minus Plus
-map("n", "-", "<C-x>", opts)
-map("n", "=", "<C-a>", opts)
+-- map("n", "-", "<C-x>", opts)
+-- map("n", "=", "<C-a>", opts)
 
 -- Jump back
 map("n", "<C-o>", "<C-o>zz", opts)
@@ -32,8 +32,8 @@ map("n", "cW", "ciW", opts)
 -- map({ "n", "v" }, "(", "}", opts)
 
 --To set in the cursor in the middle when jumping
-map({ "n", "v" }, "}", "{", opts)
-map({ "n", "v" }, "{", "}", opts)
+-- map({ "n", "v" }, "}", "{", opts)
+-- map({ "n", "v" }, "{", "}", opts)
 map("n", "N", "Nzz", opts)
 map("n", "n", "nzz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
@@ -76,7 +76,7 @@ map("n", "<leader>=", "<C-w>=", { desc = "Split Equal" })
 map("n", "<leader>\\", "<C-w>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-w>-", { desc = "Split window below" })
 map("n", "<leader>B", "<cmd>b#<cr>", { desc = "Previous Buffer" })
-map("n", "<leader>C", '<Cmd>BufferLineCloseOthers<CR>', { desc = "Delete Other Buffers" })
+map("n", "<leader>C", "<Cmd>BufferLineCloseOthers<CR>", { desc = "Delete Other Buffers" })
 map("n", "<leader>D", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window", noremap = true, silent = true })
 map(
 	"n",
