@@ -624,7 +624,7 @@ return {
 			end
 
 			local docker_up = terminal:new({
-				cmd = "docker compose up -d && docker compose logs -f web postgres web-dev-logs",
+				cmd = "docker compose up",
 				close_on_exit = false,
 				direction = "float",
 				hidden = true,
@@ -646,7 +646,7 @@ return {
 				docker_bash:toggle()
 			end
 
-			local htop = terminal:new({ direction = "float", cmd = "htop", hidden = true })
+			local htop = terminal:new({ direction = "float", cmd = "btop", hidden = true })
 
 			function HTOP_TOGGLE()
 				htop:toggle()
@@ -656,13 +656,14 @@ return {
 				size = 20,
 				open_mapping = [[<c-t>]],
 				hide_numbers = true,
-				-- persist_mode = true,
 				shade_filetypes = {},
+        shading_factor = -20,
+				shading_ratio = -3, -- the ratio of shading factor for light/dark terminal background, default: -3
 				auto_scroll = false, -- automatically scroll to the bottom on terminal output
 				shade_terminals = true,
-				shading_factor = 2,
 				start_in_insert = true,
 				insert_mappings = true,
+				persist_mode = true,
 				persist_size = true,
 				direction = "horizontal",
 				close_on_exit = true,
@@ -682,6 +683,7 @@ return {
 			local opts = { noremap = true, silent = true }
 
 			map("n", "<leader>rb", "<cmd>lua DOCKER_BASH_TOGGLE()<cr>", opts)
+			map("n", "<leader>rt", "<cmd>lua HTOP_TOGGLE()<cr>", opts)
 			map("n", "<leader>rd", "<cmd>lua DOCKER_UP_TOGGLE()<cr>", opts)
 			map("n", "<leader>rf", "<cmd>lua RAILS_FOREMAN_TOGGLE()<cr>", opts)
 			map("n", "<leader>rn", "<cmd>lua NPM_SERVER_TOGGLE()<cr>", opts)
