@@ -101,6 +101,11 @@ return {
 				desc = "Grep (Root Dir)",
 			},
 			{
+				"<leader>fp",
+				"<cmd>:let @+ = expand('%')<CR>",
+				desc = "Copy relative file path",
+			},
+			{
 				"<leader>:",
 				"<cmd>Telescope command_history<cr>",
 				desc = "Command History",

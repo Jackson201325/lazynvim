@@ -30,7 +30,7 @@ function M.get()
     { "to",         "<cmd>TSToolsOrganizeImports<CR>",                                                                                                                           desc = "Organize Imports", },
     { "tr",         "<cmd>TSToolsFileReferences<CR>",                                                                                                                            desc = "Find references", },
     { "tu",         "<cmd>TSToolsRemoveUnused<CR>",                                                                                                                              desc = "Remove Unused Statement", },
-    { "<leader>o",  "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 70, previewer = false,  layout_config = { width = 0.3, height = 0.15 } })<CR>", desc = "LSP Outline",                mode = { "n" } },
+    { "<leader>o",  "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbol_width = 40, previewer = false,  layout_config = { width = 0.3, height = 0.15 } })<CR>", desc = "LSP Outline",                mode = { "n" } },
     { "<leader>d",  "<cmd>Telescope diagnostics bufnr=0<cr>",                                                                                                                    desc = "Buffer Diagnostics" },
     { "<leader>lC", vim.lsp.codelens.refresh,                                                                                                                                    desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
     { "<leader>lL", "<cmd>LspLog<cr>",                                                                                                                                           desc = "Lsp Log",                    mode = { "n", "v" } },
@@ -40,6 +40,10 @@ function M.get()
     { "<leader>lc", vim.lsp.codelens.run,                                                                                                                                        desc = "Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
     { "<leader>ll", "<cmd>LspInfo<cr>",                                                                                                                                          desc = "Lsp Info",                   mode = { "n", "v" } },
     { "<leader>lr", vim.lsp.buf.rename,                                                                                                                                          desc = "Rename",                     has = "rename" },
+
+    { "<leader>T",  ":tabnew | term zsh<CR>", desc = "New Terminal in New Tab" },
+    { "<leader>t",  "term://zsh<CR>",                                                                                                                                            desc = "New Terminal", mode = { "n", "v" } },
+
     -- {
     --   "]]",
     --   function() LazyVim.lsp.words.jump(vim.v.count1) end,
@@ -54,20 +58,20 @@ function M.get()
     --   desc = "Prev Reference",
     --   cond = function() return LazyVim.lsp.words.enabled end
     -- },
-    -- {
-    --   "<a-n>",
-    --   function() LazyVim.lsp.words.jump(vim.v.count1, true) end,
-    --   has = "documentHighlight",
-    --   desc = "Next Reference",
-    --   cond = function() return LazyVim.lsp.words.enabled end
-    -- },
-    -- {
-    --   "<a-p>",
-    --   function() LazyVim.lsp.words.jump(-vim.v.count1, true) end,
-    --   has = "documentHighlight",
-    --   desc = "Prev Reference",
-    --   cond = function() return LazyVim.lsp.words.enabled end
-    -- },
+    {
+      "<a-n>",
+      function() LazyVim.lsp.words.jump(vim.v.count1, true) end,
+      has = "documentHighlight",
+      desc = "Next Reference",
+      cond = function() return LazyVim.lsp.words.enabled end
+    },
+    {
+      "<a-p>",
+      function() LazyVim.lsp.words.jump(-vim.v.count1, true) end,
+      has = "documentHighlight",
+      desc = "Prev Reference",
+      cond = function() return LazyVim.lsp.words.enabled end
+    },
   }
 
 	return M._keys

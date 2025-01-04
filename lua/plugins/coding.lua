@@ -64,7 +64,7 @@ return {
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
+					-- ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
 					["<C-k>"] = cmp.mapping({
 						i = function()
 							if cmp.visible() then
@@ -74,7 +74,7 @@ return {
 							end
 						end,
 					}),
-					["<C-y>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
+					["<C-y>"] = LazyVim.cmp.confirm({ behavior = cmp.confirm }),
 					["<C-CR>"] = function(fallback)
 						cmp.abort()
 						fallback()

@@ -624,7 +624,7 @@ return {
 			end
 
 			local docker_up = terminal:new({
-				cmd = "docker compose up",
+				cmd = "docker compose up -d && docker compose logs -f web postgres web-dev-logs",
 				close_on_exit = false,
 				direction = "float",
 				hidden = true,
@@ -657,7 +657,7 @@ return {
 				open_mapping = [[<c-t>]],
 				hide_numbers = true,
 				shade_filetypes = {},
-        shading_factor = -20,
+				shading_factor = -20,
 				shading_ratio = -3, -- the ratio of shading factor for light/dark terminal background, default: -3
 				auto_scroll = false, -- automatically scroll to the bottom on terminal output
 				shade_terminals = true,
@@ -710,9 +710,10 @@ return {
 			groups = { -- table: default groups
 				"UfoFoldedBg",
 				"UfoFoldedFg",
+				"UfoCursorFoldedLine",
 				"UfoPreviewCursorLine",
-				"UfoPreviewSbar",
 				"UfoPreviewThumb",
+				"UfoPreviewWinBar",
 			},
 			extra_groups = {
 				"Folded",
@@ -733,6 +734,7 @@ return {
 				"UfoPreviewCursorLine",
 				"UfoPreviewSbar",
 				"UfoPreviewThumb",
+				"UfoPreviewWinBar",
 				"WhichKey",
 				"WhichKeyFloat",
 				"ToolbarLine",
