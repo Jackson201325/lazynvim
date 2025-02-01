@@ -82,11 +82,11 @@ return {
 			},
 			setup = {
 				tailwindcss = function(_, opts)
-					local tw = require("lspconfig.server_configurations.tailwindcss")
+					-- local tw = require("lspconfig.server_configurations.tailwindcss")
 					opts.filetypes = opts.filetypes or {}
 
 					-- Add default filetypes
-					vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+					vim.list_extend(opts.filetypes, {})
 
 					-- Remove excluded filetypes
 					--- @param ft string
