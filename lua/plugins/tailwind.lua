@@ -33,11 +33,7 @@ local tailwind_ft = {
 	"razor",
 	"slim",
 	"twig",
-	"css",
-	"less",
 	"postcss",
-	"sass",
-	"scss",
 	"stylus",
 	"sugarss",
 	"javascript",
@@ -73,7 +69,7 @@ return {
 			servers = {
 				tailwindcss = {
 					-- exclude a filetype from the default_config
-					filetypes_exclude = { "markdown" },
+					filetypes_exclude = { "scss", "sass", "less", "stylus" }, -- ⬅️ Explicitly ignore preprocessors
 					-- add additional filetypes to the default_config
 					filetypes_include = {},
 					-- to fully override the default_config, change the below

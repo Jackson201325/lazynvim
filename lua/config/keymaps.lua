@@ -199,6 +199,31 @@ map("n", "<leader>gB", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
 -- map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
 map("n", "<leader>gs", "<cmd>Telescope git_status<cr>", { desc = "Git Status" })
 -- map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git Commits" })
+-- Diff against master
+map("n", "<leader>gdm", function()
+	require("telescope.builtin").git_files({
+		prompt_title = "Changes from master",
+		git_command = { "git", "diff", "--name-only", "master...HEAD" },
+		previewer = require("telescope.previewers").new_termopen_previewer({
+			get_command = function(entry)
+				return { "git", "diff", "master", "--", entry.value }
+			end,
+		}),
+	})
+end, { desc = "Show files changed from master" })
+
+-- Diff against develop
+map("n", "<leader>gdd", function()
+	require("telescope.builtin").git_files({
+		prompt_title = "Changes from develop",
+		git_command = { "git", "diff", "--name-only", "develop...HEAD" },
+		previewer = require("telescope.previewers").new_termopen_previewer({
+			get_command = function(entry)
+				return { "git", "diff", "develop", "--", entry.value }
+			end,
+		}),
+	})
+end, { desc = "Show files changed from develop" })
 
 -- commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
